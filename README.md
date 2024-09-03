@@ -289,7 +289,7 @@
 </details>
 
 <details>
-    <summary><b>Не оставляйте Cath пустым и используйте Try/Cath/Finaly в бизнес логике</b></summary>
+    <summary><b>Не оставляйте Cath пустым и не используйте Try/Cath/Finaly в бизнес логике</b></summary>
 
 // В работе
 
