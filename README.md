@@ -529,12 +529,14 @@ var count = filtered.Count;
 var average = filtered.Average(x => x.Salary);
 ```
 
+
 <b>Избегайте использования Count для проверки на пустоту</b><br>
 Count перебирает всю коллекцию, что замедляет выполнение.<br>
 <b>Решение:</b> используйте Any() вместо Count():<br>
 ```csharp
 if (myCollection.Any()) // Быстрее, чем myCollection.Count > 0
 ```
+
 
 <b>Параллельное выполнение (PLINQ)</b><br>
 Обработка больших коллекций может быть медленной.<br>
@@ -545,12 +547,14 @@ var result = myCollection.AsParallel()
 .ToList();
 ```
 
+
 <b>Проекционная оптимизация (Select)</b><br>
 Извлечение всех данных, когда требуется только несколько полей.<br>
 <b>Решение:</b> Используйте Select для выборки только необходимых данных:<br>
 ```csharp
 var names = myCollection.Select(x => x.Name).ToList();
 ```
+
 
 <b>Фильтрация перед проекцией</b><br>
 Проекция больших объёмов данных перед фильтрацией замедляет запрос.<br>
