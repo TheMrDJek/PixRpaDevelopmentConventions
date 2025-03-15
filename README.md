@@ -534,7 +534,7 @@ var average = filtered.Average(x => x.Salary);
 Count перебирает всю коллекцию, что замедляет выполнение.<br>
 <b>Решение:</b> используйте Any() вместо Count():<br>
 ```csharp
-if (myCollection.Any()) // Быстрее, чем myCollection.Count > 0
+if (myCollection.Any()) // Быстрее, чем myCollection.Count() > 0
 ```
 
 
