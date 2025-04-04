@@ -1872,20 +1872,20 @@ if (ex.Data.Contains("InvoiceId"))
 
 - **Предпочитайте метод-синтаксис выражение-синтаксису** для лучшей читаемости
 ```csharp
-  var filteredItems = items
-      .Where(i => i.IsActive)
-      .Select(i => new { i.Id, i.Name })
-      .ToList();
-  ```
+var filteredItems = items
+    .Where(i => i.IsActive)
+    .Select(i => new { i.Id, i.Name })
+    .ToList();
+```
 
 - **Форматируйте цепочки методов** для улучшения читаемости
-  ```csharp
-  //Плохо: сложно читать
-  var result = collection.Where(x => x.IsValid).Select(x => x.Name).OrderBy(x => x).Distinct().ToList();
+```csharp
+//Плохо: сложно читать
+var result = collection.Where(x => x.IsValid).Select(x => x.Name).OrderBy(x => x).Distinct().ToList();
   
-  //Хорошо: каждый метод с новой строки и с отступом
-  var result = collection
-      .Where(x => x.IsValid)
+//Хорошо: каждый метод с новой строки и с отступом
+var result = collection
+  .Where(x => x.IsValid)
 .Select(x => x.Name)
       .OrderBy(x => x)
       .Distinct()
