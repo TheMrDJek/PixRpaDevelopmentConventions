@@ -1,7 +1,10 @@
 # Строковые литералы
 
-<details>
-    <summary><b>Эффективная работа со строковыми литералами в PIX RPA</b></summary>
+## Содержание
+
+- [Эффективная работа со строковыми литералами в PIX RPA](#эффективная-работа-со-строковыми-литералами-в-pix-rpa)
+
+## Эффективная работа со строковыми литералами в PIX RPA
 
 C# предлагает несколько специальных синтаксических конструкций для работы со строками, которые значительно упрощают разработку в PIX RPA.
 
@@ -24,8 +27,8 @@ string report = $"Сумма: {amount:C2} | Дата: {date:dd.MM.yyyy}";
 
 **Когда использовать в PIX RPA:**
 - Формирование сообщений для логирования
-- Построение SQL-запросов с параметрами
-- Формирование путей к файлам
+- Формирование текстов писем и уведомлений
+- Формирование имен файлов (для путей используйте `Path.Combine`)
 - Генерация отчетов
 
 #### 2. Дословные строки (`@`)
@@ -95,23 +98,22 @@ string logEntry = $@"Время: {DateTime.Now:HH:mm:ss}
 // Пример в контексте PIX RPA:
 string logMessage = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Обработка файла {fileName}";
 
-// Пример пути к файлу:
-string filePath = @$"C:\PIX\Reports\{DateTime.Now:yyyy-MM-dd}\{reportName}.xlsx";
+// Пример имени файла отчета:
+string reportFileName = $"{reportName}_{DateTime.Now:yyyy-MM-dd}.xlsx";
 
-// Пример SQL-запроса:
-string query = @$"
-SELECT * 
-FROM Orders 
-WHERE CustomerID = '{customerId}' 
-AND OrderDate >= '{startDate:yyyy-MM-dd}'";
+// Пример SQL-запроса: текст запроса — дословная строка, значения — параметры
+string query = @"
+SELECT OrderId, Amount
+FROM Orders
+WHERE CustomerID = @customerId
+  AND OrderDate >= @startDate";
 ```
+
+> **Важно:** Никогда не подставляйте значения в SQL-запрос через интерполяцию или конкатенацию строк. Это открывает возможность SQL-инъекции и ломает запрос, если в данных встретится кавычка. Передавайте значения через параметры запроса (см. [Соглашение о БД](../01-conventions/database.md)).
 
 Дополнительная информация:
 - [Строковые литералы verbatim](https://learn.microsoft.com/ru-ru/dotnet/csharp/programming-guide/strings/#verbatim-string-literals)
 - [Необработанные строковые литералы](https://learn.microsoft.com/ru-ru/dotnet/csharp/programming-guide/strings/#raw-string-literals)
 - [Интерполяция строк](https://learn.microsoft.com/ru-ru/dotnet/csharp/programming-guide/strings/#string-interpolation)
 
-
-**[⬆ К карте разделов](../../README.md#карта-разделов)**
-
-</details>
+[⬆ К содержанию](#содержание)

@@ -1,7 +1,39 @@
 # LINQ
 
-<details>
-    <summary><b>Эффективное использование LINQ в PIX RPA</b></summary>
+## Содержание
+
+- [Форматируйте LINQ-запросы](#форматируйте-linq-запросы)
+- [Эффективное использование LINQ в PIX RPA](#эффективное-использование-linq-в-pix-rpa)
+
+## Форматируйте LINQ-запросы
+
+В PIX RPA часто используется LINQ для обработки данных. Следуйте этим рекомендациям для поддержания читаемости:
+
+- **Предпочитайте метод-синтаксис выражение-синтаксису** для лучшей читаемости
+```csharp
+var filteredItems = items
+    .Where(i => i.IsActive)
+    .Select(i => new { i.Id, i.Name })
+    .ToList();
+```
+
+- **Форматируйте цепочки методов** для улучшения читаемости
+```csharp
+// Плохо: сложно читать
+var result = collection.Where(x => x.IsValid).Select(x => x.Name).OrderBy(x => x).Distinct().ToList();
+
+// Хорошо: каждый метод с новой строки и с отступом
+var result = collection
+    .Where(x => x.IsValid)
+    .Select(x => x.Name)
+    .OrderBy(x => x)
+    .Distinct()
+    .ToList();
+```
+
+[⬆ К содержанию](#содержание)
+
+## Эффективное использование LINQ в PIX RPA
 
 LINQ (Language Integrated Query) — мощный инструмент для работы с коллекциями данных в C#, который позволяет писать компактный и выразительный код. В контексте PIX RPA применение LINQ вместо циклов и встроенных активностей существенно повышает читаемость и поддерживаемость кода.
 
@@ -157,6 +189,4 @@ var servers = ((Dictionary<string, object>)configData["Settings"])
 - [101 примеров LINQ (Для ознакомления, но майкрософт не поддерживают проект, отправили его в архив)](https://github.com/dotnet/try-samples/blob/main/101-linq-samples/index.md)
 - [Производительность LINQ](https://learn.microsoft.com/ru-ru/dotnet/standard/linq/write-efficient-queries)
 
-**[⬆ К карте разделов](../../README.md#карта-разделов)**
-
-</details>
+[⬆ К содержанию](#содержание)
