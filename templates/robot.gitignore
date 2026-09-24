@@ -1,0 +1,27 @@
+# Базовый .gitignore для проекта робота PIX RPA
+# См. правило GIT-04 в docs/01-conventions/git.md
+
+# Папки для временных файлов
+[Tt]emp/
+[Ll]ogs/
+[Tt]estResults/
+
+# Файлы с данными для тестирования, содержащие реальные данные
+test_data/
+sample_files/
+
+# Локальные файлы конфигурации и секреты
+*.local.json
+*.secret.*
+.env
+
+# Скриншоты ошибок и отладочные выгрузки
+[Ss]creenshots/
+*.dmp
+
+# Служебные файлы ОС и редакторов
+Thumbs.db
+.DS_Store
+.vs/
+.vscode/
+~$*

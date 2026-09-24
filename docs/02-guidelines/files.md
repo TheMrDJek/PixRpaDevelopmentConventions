@@ -5,6 +5,7 @@ C# предлагает мощные встроенные классы для б
 ## Содержание
 
 - [FS-01. Используйте классы Path, Directory и File](#fs-01-используйте-классы-path-directory-и-file) — SHOULD
+- [FS-05. Выбирайте между File/Directory и FileInfo/DirectoryInfo по количеству операций](#fs-05-выбирайте-между-filedirectory-и-fileinfodirectoryinfo-по-количеству-операций) — SHOULD
 - [FS-02. Не используйте жестко заданные пути и конкатенацию строк для путей](#fs-02-не-используйте-жестко-заданные-пути-и-конкатенацию-строк-для-путей) — MUST
 - [FS-03. Управляйте временными файлами](#fs-03-управляйте-временными-файлами) — MUST
 - [FS-04. Копируйте файлы перед обработкой](#fs-04-копируйте-файлы-перед-обработкой) — SHOULD
@@ -118,6 +119,65 @@ void ProcessFilesRecursively(string directory, string searchPattern)
 
 [⬆ К содержанию](#содержание)
 
+## FS-05. Выбирайте между File/Directory и FileInfo/DirectoryInfo по количеству операций
+
+**Уровень:** SHOULD — рекомендуется
+
+В .NET есть две пары классов для работы с файловой системой:
+
+| | Статические классы `File`, `Directory` | Экземплярные классы `FileInfo`, `DirectoryInfo` |
+|---|---|---|
+| Вызов | `File.Exists(path)` — путь передается в каждый вызов | `var info = new FileInfo(path); info.Exists` — объект хранит путь |
+| Проверки безопасности и чтение атрибутов | При каждом вызове | Один раз при первом обращении, затем значения кешируются |
+| Когда удобнее | Одна-две операции с файлом | Несколько операций или чтение нескольких свойств одного файла, перебор содержимого папки |
+
+```csharp
+// Одна операция — статический класс
+if (File.Exists(reportPath))
+    File.Delete(reportPath);
+
+// Несколько свойств одного файла — FileInfo
+var fileInfo = new FileInfo(attachmentPath);
+if (fileInfo.Length > maxAttachmentSizeBytes)
+    Log.Warning($"Вложение {fileInfo.Name} ({fileInfo.Length / 1024} КБ) превышает лимит");
+
+// Перебор папки: DirectoryInfo возвращает FileInfo с уже прочитанными свойствами
+var oldFiles = new DirectoryInfo(archiveFolder)
+    .GetFiles("*.pdf")
+    .Where(f => f.LastWriteTime < DateTime.Now.AddDays(-retentionDays));
+```
+
+> [!WARNING]
+> `FileInfo` и `DirectoryInfo` кешируют свойства. Если файл изменился после создания объекта, вызовите `Refresh()`, прежде чем читать `Exists`, `Length` или `LastWriteTime`.
+
+### Работа с атрибутами: оператор `|=`
+
+Атрибуты файлов и папок (`FileAttributes`) — это битовые флаги: у одной папки может быть одновременно несколько атрибутов. Чтобы добавить атрибут, не сбросив уже установленные, используйте оператор побитового ИЛИ с присваиванием `|=`:
+
+```csharp
+var dirInfo = new DirectoryInfo(tempFolder);
+
+// Добавить флаг Hidden к текущим атрибутам, сохранив остальные
+dirInfo.Attributes |= FileAttributes.Hidden;
+
+// То же самое в полной записи
+dirInfo.Attributes = dirInfo.Attributes | FileAttributes.Hidden;
+```
+
+Если у папки был атрибут `ReadOnly`, то после выполнения кода она станет `ReadOnly | Hidden`. Присваивание `dirInfo.Attributes = FileAttributes.Hidden` без `|` сбросило бы `ReadOnly`.
+
+Остальные операции с флагами:
+
+```csharp
+// Снять флаг, сохранив остальные
+dirInfo.Attributes &= ~FileAttributes.Hidden;
+
+// Проверить наличие флага
+bool isHidden = dirInfo.Attributes.HasFlag(FileAttributes.Hidden);
+```
+
+[⬆ К содержанию](#содержание)
+
 ## FS-02. Не используйте жестко заданные пути и конкатенацию строк для путей
 
 **Уровень:** MUST — обязательно
@@ -206,6 +266,7 @@ void SafeDeleteFile(string path)
 
 **Уровень:** SHOULD — рекомендуется
 
+> [!NOTE]
 > 🚧 **Раздел в работе.**
 
 При работе с файлами, особенно с форматами, которые могут быть открыты другими пользователями (Excel, Word, PDF), важно использовать копирование для предотвращения конфликтов доступа и обеспечения стабильности работы роботов.

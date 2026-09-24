@@ -285,6 +285,8 @@ test_data/
 sample_files/
 ```
 
+Базовый шаблон: [templates/robot.gitignore](../../templates/robot.gitignore).
+
 **Рекомендации по настройке .gitignore:**
 - Адаптируйте базовый шаблон под конкретный проект
 - Добавляйте новые правила по мере необходимости
