@@ -339,7 +339,7 @@ ProcessInvoice (Transaction Script)
 ## Другие шаблоны
 
 > [!NOTE]
-> 🚧 **Раздел в работе** ([issue #18](https://github.com/TheMrDJek/pix-conventions/issues/18)). Описания будут добавлены.
+> 🚧 **Раздел в работе** ([issue #18](https://github.com/TheMrDJek/PixRpaDevelopmentConventions/issues/18)). Описания будут добавлены.
 
 | Шаблон | Для чего | Статус |
 |--------|----------|--------|
