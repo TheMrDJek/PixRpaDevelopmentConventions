@@ -25,7 +25,7 @@
 
 Позволяет безопасно обращаться к свойствам и методам объектов, которые могут быть null.
 
-![operator](../../images/conditions/operator.png)
+![operator](../../images/condition/operator.png)
 
 **Применение в PIX RPA:**
 - Доступ к вложенным свойствам объектов из API
@@ -58,12 +58,12 @@ string firstServer = config?.Servers?[0];
 
 Компактная замена простых условных конструкций if-else.
 
-![operator2](../../images/conditions/operator2.png)
+![operator2](../../images/condition/operator2.png)
 
 > [!IMPORTANT]
 > В PIX RPA контекстные значения являются свойствами C#, поэтому нельзя использовать параметры `out` и `ref` напрямую.
 
-![operator2_2](../../images/conditions/operator2_2.png)
+![operator2_2](../../images/condition/operator2_2.png)
 
 **Применение в PIX RPA:**
 - Условная логика в выражениях и присваиваниях
@@ -74,7 +74,7 @@ string firstServer = config?.Servers?[0];
 
 Предоставляют значение по умолчанию для null-выражений.
 
-![operator3](../../images/conditions/operator3.png)
+![operator3](../../images/condition/operator3.png)
 
 **Применение в PIX RPA:**
 - Установка значений по умолчанию
@@ -86,7 +86,7 @@ string firstServer = config?.Servers?[0];
 Современный C# позволяет использовать мощный механизм сопоставления с образцом (pattern matching) для более выразительной обработки условий.
 Pattern matching позволяет сопоставлять не только значения, но и типы, свойства и условия.
 
-![operatornotuse](../../images/conditions/NotUseOperator.png)
+![operatornotuse](../../images/condition/NotUseOperator.png)
 
 **Применение в PIX RPA:**
 - Маппинг статусов и кодов ошибок

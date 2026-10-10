@@ -44,7 +44,7 @@
 - Снижение читаемости кода
 - Усложнение поддержки и модификации существующего кода
 
-![camelCasing](../../images/naming/camelCasing.png)
+![camelCasing](../../images/variable/camelCasing.png)
 
 [⬆ К содержанию](#содержание)
 
@@ -68,7 +68,7 @@
 **Исключения:** 
 Для индексов в коротких циклах допустимо использовать однобуквенные переменные (`i`, `j`, `k`), но только в рамках локального контекста и небольших блоков кода. Никогда не используйте такие переменные как параметры скриптов.
 
-![MeaningfulNames](../../images/naming/domainName.png)
+![MeaningfulNames](../../images/variable/domainName.png)
 
 [⬆ К содержанию](#содержание)
 
@@ -130,7 +130,7 @@
 **Последствия использования кириллицы:**
 - Возможные ошибки кодировки в различных средах
 
-![ruCharts](../../images/naming/ruCharts.png)
+![ruCharts](../../images/variable/ruCharts.png)
 
 [⬆ К содержанию](#содержание)
 
@@ -153,7 +153,7 @@
 - Избыточность информации
 - Сложности при изменении типов данных
 
-![FixHungarianNotation](../../images/naming/FixHungarianNotation.png)
+![FixHungarianNotation](../../images/variable/FixHungarianNotation.png)
 
 [⬆ К содержанию](#содержание)
 
@@ -173,7 +173,7 @@
 - Снижение читаемости
 - Потеря внимания к действительно важным аспектам кода
 
-![Context](../../images/naming/Context.png)
+![Context](../../images/variable/Context.png)
 
 [⬆ К содержанию](#содержание)
 
@@ -205,7 +205,7 @@
 - Сложности при рефакторинге
 - Увеличение вероятности ошибок при использовании
 
-![NotContext](../../images/naming/NotContext.png)
+![NotContext](../../images/variable/NotContext.png)
 
 [⬆ К содержанию](#содержание)
 
@@ -237,7 +237,7 @@
 - Необходимость изучения реализации для понимания назначения
 - Повышенный риск неправильного использования
 
-![Abstract](../../images/naming/Abstract.png)
+![Abstract](../../images/variable/Abstract.png)
 
 [⬆ К содержанию](#содержание)
 
@@ -269,6 +269,6 @@
 - Повышенная вероятность ошибок при изменении условий
 - Сложности при чтении и понимании логики
 
-![NotVariables](../../images/naming/NotVariables.png)
+![NotVariables](../../images/variable/NotVariables.png)
 
 [⬆ К содержанию](#содержание)

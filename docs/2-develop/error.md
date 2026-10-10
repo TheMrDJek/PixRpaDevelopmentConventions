@@ -54,7 +54,7 @@ catch (Exception ex)
 
 **Пример вызова исключения NullReferenceException:**
 
-![Exception1](../../images/exceptions/Exception1.png)
+![Exception1](../../images/error/Exception1.png)
 
 [⬆ К содержанию](#содержание)
 

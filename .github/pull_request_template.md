@@ -14,5 +14,6 @@
 ## Проверка
 
 - [ ] Правила оформлены по [CONTRIBUTING](../CONTRIBUTING.md#формат-правила): идентификатор, уровень, объяснение «почему»
+- [ ] Примеры к новым правилам — скриншоты из PIX Studio (см. [CONTRIBUTING](../CONTRIBUTING.md#примеры-скриншоты-из-pix-studio))
 - [ ] Выполнены `python tools/build_docs.py` и `python tools/check_links.py`
 - [ ] Добавлена запись в CHANGELOG.md
