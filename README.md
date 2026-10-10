@@ -1,6 +1,6 @@
-# PIX RPA Development Conventions & Best Practices
+# PIX RPA Development Conventions
 
-Соглашения и рекомендации для команд, которые разрабатывают и сопровождают роботов на платформе PIX RPA: от оценки процесса и структуры проекта до администрирования PIX Master.
+Соглашения для разработчиков роботов на платформе PIX RPA: от создания проекта до работы робота в PIX Master.
 
 ## Зачем это нужно
 
@@ -15,99 +15,95 @@
 
 ## С чего начать
 
-| Кто вы | Что прочитать |
-|--------|---------------|
-| Новый разработчик | [Глоссарий](docs/glossary.md) → [Структура проекта](docs/01-conventions/project-structure.md) → [Исключения](docs/01-conventions/exceptions.md) → [Чек-лист код-ревью](templates/code-review-checklist.md) |
-| Ревьюер / техлид | [Чек-лист код-ревью](templates/code-review-checklist.md), [Реестр правил](docs/rules-index.md), [Код-ревью](docs/03-robot-lifecycle/code-review.md) |
-| Аналитик | [Жизненный цикл робота](docs/03-robot-lifecycle/README.md), шаблон [PDD](templates/pdd.md) |
-| Администратор PIX Master | [Соглашение об администрировании PIX Master](docs/04-master/README.md) |
-| Поддержка | [Сопровождение](docs/03-robot-lifecycle/support.md), шаблон [runbook](templates/runbook.md) |
+1. [Глоссарий](docs/glossary.md) — термины: транзакция, ассет, контур, бизнес-исключение
+2. [Структура проекта](docs/1-project/project.md) — как устроен робот
+3. [Исключения](docs/2-develop/error.md) — как робот должен падать
+4. [Чек-лист разработчика](docs/checklist.md) — что проверить перед Pull Request
 
-## Как устроена документация
+Полный список правил — в [реестре правил](docs/rules-index.md).
 
-| Раздел | Для кого | Что внутри |
-|--------|----------|------------|
-| [Соглашения](#соглашения) | Разработчики, ревьюеры | Правила, которые проверяются на код-ревью. В основном MUST |
-| [Рекомендации по написанию скриптов](#рекомендации-по-написанию-скриптов) | Разработчики | Приемы написания качественного кода. В основном SHOULD |
-| [Жизненный цикл робота](#жизненный-цикл-робота) | Аналитики, разработчики, поддержка | Как робот проходит путь от идеи до вывода из эксплуатации |
-| [PIX Master](#pix-master) | Администраторы, DevOps | Именование и настройка компонентов оркестратора |
-
-Сводный список всех правил — в [реестре правил](docs/rules-index.md), термины — в [глоссарии](docs/glossary.md).
+## Как читать правила
 
 ### Уровни обязательности
 
-У каждого правила есть идентификатор (например, `EXC-03`) и уровень:
+| Уровень | Что значит | Если не соблюдается |
+|---------|------------|---------------------|
+| 🔴 **Обязательно** | Соблюдается всегда | Pull Request не принимается. Исключение — только с обоснованием в описании PR и согласованием с техлидом |
+| 🟡 **Рекомендуется** | Соблюдается по умолчанию | Допустимо, если причина понятна и указана в комментарии к коду или в PR |
+| 🟢 **По ситуации** | Полезный прием | Решает разработчик |
 
-| Уровень | Значение | Что делать при нарушении |
-|---------|----------|--------------------------|
-| **MUST** — обязательно | Правило соблюдается всегда | Нарушение блокирует слияние Pull Request. Исключение возможно только с обоснованием в описании PR и согласованием с техлидом |
-| **SHOULD** — рекомендуется | Правило соблюдается по умолчанию | Отступление допустимо, если причина понятна и указана в комментарии к коду или в PR |
-| **MAY** — допустимо | Прием можно применять по ситуации | Решение принимает разработчик |
+### Теги правил
 
-На код-ревью ссылайтесь на правило по идентификатору: «нарушено EXC-03», «см. LOOP-02».
+Тег правила совпадает с именем файла, в котором оно описано: `ERROR-03` — третье правило в [error.md](docs/2-develop/error.md), `EXCEL-01` — первое в [excel.md](docs/3-integrations/excel.md). На код-ревью ссылайтесь на правило по тегу: «нарушено ERROR-03».
 
 ## Карта разделов
 
-### Соглашения
+Разделы идут в порядке работы над роботом.
 
-- [Структура проекта](docs/01-conventions/project-structure.md) — `PRJ`
-- [Конфигурация и конфиденциальные данные](docs/01-conventions/config-and-secrets.md) — `CFG`
-- [Git](docs/01-conventions/git.md) — `GIT`
-- [Именование](docs/01-conventions/naming.md) — `NAM`
-- [Базы данных](docs/01-conventions/database.md) — `DB`
-- [Очереди](docs/01-conventions/queues.md) — `QUE`
-- [Логирование](docs/01-conventions/logging.md) — `LOG`
-- [Исключения](docs/01-conventions/exceptions.md) — `EXC`
-- [Надежность и восстановление после сбоев](docs/01-conventions/reliability.md) — `REL`
-- [Персональные данные](docs/01-conventions/personal-data.md) — `PD`
+### 1. Создание проекта
 
-### Рекомендации по написанию скриптов
+| Раздел | Тег | О чем |
+|--------|-----|-------|
+| [Структура проекта](docs/1-project/project.md) | `PROJECT` | Слои, State Machine, Dispatcher/Performer, Transaction Script |
+| [Именование проекта](docs/1-project/naming.md) | `NAMING` | Имена проектов, папок, скриптов и файлов |
+| [Конфигурация и конфиденциальные данные](docs/1-project/config.md) | `CONFIG` | Ассеты, секреты, входные параметры, жесткое кодирование, имена ассетов |
 
-- [Стиль кода и принципы проектирования](docs/02-guidelines/csharp-style.md) — `CS`
-- [Строковые литералы](docs/02-guidelines/strings.md) — `STR`
-- [LINQ](docs/02-guidelines/linq.md) — `LNQ`
-- [Условия и условные операторы](docs/02-guidelines/conditions.md) — `CND`
-- [Циклы и goto](docs/02-guidelines/loops-and-goto.md) — `LOOP`
-- [Работа с файлами](docs/02-guidelines/files.md) — `FS`
-- [Работа с Excel](docs/02-guidelines/excel.md) — `XLS`
-- [Работа с почтой](docs/02-guidelines/email.md) — `MAIL`
-- [Интеграции с внешними системами](docs/02-guidelines/integrations.md) — `INT`
-- [Жесткое кодирование](docs/02-guidelines/hardcoding.md) — `HC`
-- [Активности PIX RPA](docs/02-guidelines/pix-activities.md) — `ACT`
-- [Работа с UI](docs/02-guidelines/ui-automation.md) — `UI`
-- [ИИ и интеллектуальная обработка документов](docs/02-guidelines/ai-and-idp.md) — `AI`
+### 2. Разработка
 
-### Жизненный цикл робота
+Правила относятся и к C#-коду, и к схеме процесса из активностей: в активностях вызываются те же функции и объекты.
 
-- [Обзор этапов и ролей](docs/03-robot-lifecycle/README.md)
-- [Оценка процесса](docs/03-robot-lifecycle/assessment.md) — `ASM`
-- [Проектирование](docs/03-robot-lifecycle/design.md) — `DSN`
-- [Тестирование](docs/03-robot-lifecycle/testing.md) — `TST`
-- [Код-ревью](docs/03-robot-lifecycle/code-review.md) — `REV`
-- [Релиз и развертывание](docs/03-robot-lifecycle/release-and-deploy.md) — `DPL`
-- [Сопровождение](docs/03-robot-lifecycle/support.md) — `SUP`
-- [Документирование роботов](docs/03-robot-lifecycle/documentation.md) — будет перенесено во внутренний Confluence
+**Как писать код**
 
-### PIX Master
+| Раздел | Тег | О чем |
+|--------|-----|-------|
+| [Код и активности](docs/2-develop/code.md) | `CODE` | Соглашения C#, DRY, SRP, KISS, YAGNI, «Выполнить», «Комментарий», аргументы, коллекции в столбик |
+| [Имена параметров и переменных](docs/2-develop/variable.md) | `VARIABLE` | Префиксы In_/Out_, регистр, осмысленные имена, термины |
+| [Условия](docs/2-develop/condition.md) | `CONDITION` | `?.`, `??`, тернарный оператор, вложенность, отрицательные условия |
+| [Циклы](docs/2-develop/loop.md) | `LOOP` | Таймауты, «Цикл с … по», «Цикл для каждого», отказ от goto |
+| [Строки](docs/2-develop/string.md) | `STRING` | Интерполяция, string.Format, дословные строки, StringBuilder |
+| [LINQ](docs/2-develop/linq.md) | `LINQ` | Форматирование, фильтрация, оптимальные методы, когда цикл лучше |
+| [Работа с файлами](docs/2-develop/file.md) | `FILE` | Пути, временные файлы, копирование, классы File/FileInfo, атрибуты |
 
-- [Обзор и общий формат имен](docs/04-master/README.md)
-- [Очереди данных](docs/04-master/queues.md) — `MQ`
-- [Хосты](docs/04-master/hosts.md) — `HST`
-- [Агенты роботов](docs/04-master/agents.md) — `AGT`
-- [Задачи, триггеры и планирование](docs/04-master/tasks-and-triggers.md) — `TSK`
-- [Ассеты](docs/04-master/assets.md) — `AST`
-- [Мониторинг и оповещения](docs/04-master/monitoring.md) — `MON`
-- [Интеграция компонентов](docs/04-master/components.md)
+**Как робот работает с ошибками и данными**
+
+| Раздел | Тег | О чем |
+|--------|-----|-------|
+| [Исключения](docs/2-develop/error.md) | `ERROR` | Бизнес- и системные исключения, try/catch, источник ошибки |
+| [Логирование](docs/2-develop/log.md) | `LOG` | Уровни, что логировать, ID транзакции |
+| [Надежность и восстановление](docs/2-develop/recovery.md) | `RECOVERY` | Идемпотентность, восстановление, остановка после серии ошибок |
+| [Персональные данные](docs/2-develop/privacy.md) | `PRIVACY` | 152-ФЗ: логи, скриншоты, тестовые данные, внешние сервисы |
+
+**Отдельные задачи**
+
+| Раздел | Тег | О чем |
+|--------|-----|-------|
+| [Работа с UI](docs/2-develop/ui.md) | `UI` | Селекторы, ожидания, абстракции |
+| [ИИ и обработка документов](docs/2-develop/ai.md) | `AI` | LLM, OCR, проверка результатов |
+| [Тестирование](docs/2-develop/test.md) | `TEST` | Модульные тесты, бизнес-исключения, сбои окружения |
+
+### 3. Интеграции
+
+| Раздел | Тег | О чем |
+|--------|-----|-------|
+| [Очереди](docs/3-integrations/queue.md) | `QUEUE` | Транзакции, статусы, повторы, именование очередей |
+| [Базы данных](docs/3-integrations/db.md) | `DB` | Параметры, bulk, фильтрация, NULL |
+| [Интеграции с внешними системами](docs/3-integrations/integration.md) | `INTEGRATION` | Выбор канала, таймауты, учетные записи, HttpClient |
+| [Почта](docs/3-integrations/mail.md) | `MAIL` | SMTP/IMAP/Exchange вместо Outlook |
+| [Excel](docs/3-integrations/excel.md) | `EXCEL` | Работа без Interop |
+
+### 4. Публикация и работа в PIX Master
+
+| Раздел | Тег | О чем |
+|--------|-----|-------|
+| [Публикация и версии](docs/4-master/publish.md) | `PUBLISH` | SemVer, перенос DEV → UAT → PROD, откат |
+| [Работа робота в PIX Master](docs/4-master/master.md) | `MASTER` | Имена роботов и задач, триггеры, расписания, связь компонентов |
 
 ### Шаблоны
 
-- [PDD — описание процесса](templates/pdd.md)
-- [SDD — техническое решение](templates/sdd.md)
-- [Runbook для поддержки](templates/runbook.md)
-- [Чек-лист код-ревью](templates/code-review-checklist.md)
+- [Чек-лист разработчика и ревьюера](docs/checklist.md)
 - [.gitignore для проекта робота](templates/robot.gitignore)
 - Шаблоны проектов роботов — в репозитории [pix-templates](https://github.com/TheMrDJek/pix-templates)
 
 ## Участвуйте в развитии
 
-Репозиторий открыт для предложений: создавайте Issues или Pull Requests. Как оформить правило и проверить изменения перед отправкой — в [CONTRIBUTING](CONTRIBUTING.md). История изменений — в [CHANGELOG](CHANGELOG.md).
+Предложения — через Issues и Pull Requests. Как оформить правило и проверить изменения перед отправкой — в [CONTRIBUTING](CONTRIBUTING.md). История изменений — в [CHANGELOG](CHANGELOG.md).
