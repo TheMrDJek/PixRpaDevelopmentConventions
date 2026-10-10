@@ -104,13 +104,6 @@
 - [.gitignore для проекта робота](templates/robot.gitignore)
 - Шаблоны проектов роботов — в репозитории [pix-templates](https://github.com/TheMrDJek/pix-templates)
 
-## Связанные репозитории
-
-| Репозиторий | Для кого | Что внутри |
-|-------------|----------|------------|
-| [pix-rpa-process](https://github.com/TheMrDJek/pix-rpa-process) | Команда, аналитики, поддержка, администраторы | Git и код-ревью, жизненный цикл робота (оценка, PDD/SDD, приемка, сопровождение), администрирование PIX Master |
-| [pix-templates](https://github.com/TheMrDJek/pix-templates) | Разработчики | Шаблоны проектов роботов |
-
 ## Участвуйте в развитии
 
 Предложения — через Issues и Pull Requests. Как оформить правило и проверить изменения перед отправкой — в [CONTRIBUTING](CONTRIBUTING.md). История изменений — в [CHANGELOG](CHANGELOG.md).
