@@ -208,8 +208,8 @@ var servers = ((Dictionary<string, object>)configData["Settings"])
     : Array.Empty<string>();
 ```
 
-![UseLINQ](../../../images/linq/UseLINQ.png)
-![UseLINQ2](../../../images/linq/UseLINQ2.png)
+![UseLINQ](../../images/linq/UseLINQ.png)
+![UseLINQ2](../../images/linq/UseLINQ2.png)
 
 [⬆ К содержанию](#содержание)
 

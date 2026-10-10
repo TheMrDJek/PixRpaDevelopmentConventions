@@ -1,12 +1,14 @@
 # Работа с файлами
 
-Пути, временные файлы и файлы, которые могут быть открыты другими пользователями. Справка по классам `Path`, `File`, `FileInfo` и работе с атрибутами — в разделе [Классы файловой системы .NET](csharp/filesystem.md).
+Пути, временные файлы, файлы, открытые другими пользователями, и классы .NET для работы с файловой системой.
 
 ## Содержание
 
 - [FILE-01. Не используйте жестко заданные пути и конкатенацию строк для путей](#file-01-не-используйте-жестко-заданные-пути-и-конкатенацию-строк-для-путей) — 🔴 Обязательно
 - [FILE-02. Управляйте временными файлами](#file-02-управляйте-временными-файлами) — 🔴 Обязательно
 - [FILE-03. Копируйте файлы перед обработкой](#file-03-копируйте-файлы-перед-обработкой) — 🟡 Рекомендуется
+- [FILE-04. Используйте классы Path, Directory и File](#file-04-используйте-классы-path-directory-и-file) — 🟡 Рекомендуется
+- [FILE-05. Выбирайте между File/Directory и FileInfo/DirectoryInfo по количеству операций](#file-05-выбирайте-между-filedirectory-и-fileinfodirectoryinfo-по-количеству-операций) — 🟡 Рекомендуется
 
 ## FILE-01. Не используйте жестко заданные пути и конкатенацию строк для путей
 
@@ -341,5 +343,95 @@ var csvData = ProcessFileWithCopy(csvPath, path => ReadCsvFile(path));
 4. **Обрабатывайте исключения специфично для каждого типа файлов**
    - Создавайте специализированные обработчики ошибок для Excel, PDF и других форматов
    - Предоставляйте понятные бизнес-сообщения при сбоях
+
+[⬆ К содержанию](#содержание)
+
+## FILE-04. Используйте классы Path, Directory и File
+
+🟡 **Рекомендуется**
+
+Для работы с путями, папками и файлами используйте стандартные классы .NET, а не собственные функции на строках. Полные списки методов — в документации Microsoft: [Path](https://learn.microsoft.com/ru-ru/dotnet/api/system.io.path), [Directory](https://learn.microsoft.com/ru-ru/dotnet/api/system.io.directory), [File](https://learn.microsoft.com/ru-ru/dotnet/api/system.io.file).
+
+Методы, которые чаще всего нужны роботу:
+
+| Задача | Метод | Связанное правило |
+|--------|-------|-------------------|
+| Собрать путь из частей | `Path.Combine(folder, fileName)` | [FILE-01](#file-01-не-используйте-жестко-заданные-пути-и-конкатенацию-строк-для-путей) |
+| Получить имя или расширение файла | `Path.GetFileName`, `Path.GetFileNameWithoutExtension`, `Path.GetExtension` | — |
+| Папка для временных файлов | `Path.GetTempPath()` | [FILE-02](#file-02-управляйте-временными-файлами) |
+| Создать папку, если ее нет | `Directory.CreateDirectory(path)` — не выбрасывает исключение, если папка уже есть | [ERROR-03](error.md#error-03-не-оставляйте-catch-пустым-и-не-используйте-trycatchfinally-в-бизнес-логике) |
+| Проверить наличие файла перед чтением | `File.Exists(path)` | [ERROR-03](error.md#error-03-не-оставляйте-catch-пустым-и-не-используйте-trycatchfinally-в-бизнес-логике) |
+| Скопировать файл перед обработкой | `File.Copy(source, temp, overwrite: true)` | [FILE-03](#file-03-копируйте-файлы-перед-обработкой) |
+| Перебрать файлы по маске | `Directory.GetFiles(folder, "*.pdf")` | — |
+
+```csharp
+// Папка отчетов берется из ассета, подпапка — по дате
+string reportFolder = Path.Combine(reportBasePath, DateTime.Now.ToString("yyyy-MM-dd"));
+Directory.CreateDirectory(reportFolder);
+
+// PDF-файлы из входной папки, без учета регистра расширения
+var pdfFiles = Directory.GetFiles(inputFolder)
+    .Where(f => Path.GetExtension(f).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
+    .ToList();
+```
+
+[⬆ К содержанию](#содержание)
+
+## FILE-05. Выбирайте между File/Directory и FileInfo/DirectoryInfo по количеству операций
+
+🟡 **Рекомендуется**
+
+В .NET есть две пары классов для работы с файловой системой:
+
+| | Статические классы `File`, `Directory` | Экземплярные классы `FileInfo`, `DirectoryInfo` |
+|---|---|---|
+| Вызов | `File.Exists(path)` — путь передается в каждый вызов | `var info = new FileInfo(path); info.Exists` — объект хранит путь |
+| Проверки безопасности и чтение атрибутов | При каждом вызове | Один раз при первом обращении, затем значения кешируются |
+| Когда удобнее | Одна-две операции с файлом | Несколько операций или чтение нескольких свойств одного файла, перебор содержимого папки |
+
+```csharp
+// Одна операция — статический класс
+if (File.Exists(reportPath))
+    File.Delete(reportPath);
+
+// Несколько свойств одного файла — FileInfo
+var fileInfo = new FileInfo(attachmentPath);
+if (fileInfo.Length > maxAttachmentSizeBytes)
+    Log.Warning($"Вложение {fileInfo.Name} ({fileInfo.Length / 1024} КБ) превышает лимит");
+
+// Перебор папки: DirectoryInfo возвращает FileInfo с уже прочитанными свойствами
+var oldFiles = new DirectoryInfo(archiveFolder)
+    .GetFiles("*.pdf")
+    .Where(f => f.LastWriteTime < DateTime.Now.AddDays(-retentionDays));
+```
+
+> [!WARNING]
+> `FileInfo` и `DirectoryInfo` кешируют свойства. Если файл изменился после создания объекта, вызовите `Refresh()`, прежде чем читать `Exists`, `Length` или `LastWriteTime`.
+
+### Работа с атрибутами: оператор `|=`
+
+Атрибуты файлов и папок (`FileAttributes`) — это битовые флаги: у одной папки может быть одновременно несколько атрибутов. Чтобы добавить атрибут, не сбросив уже установленные, используйте оператор побитового ИЛИ с присваиванием `|=`:
+
+```csharp
+var dirInfo = new DirectoryInfo(tempFolder);
+
+// Добавить флаг Hidden к текущим атрибутам, сохранив остальные
+dirInfo.Attributes |= FileAttributes.Hidden;
+
+// То же самое в полной записи
+dirInfo.Attributes = dirInfo.Attributes | FileAttributes.Hidden;
+```
+
+Если у папки был атрибут `ReadOnly`, то после выполнения кода она станет `ReadOnly | Hidden`. Присваивание `dirInfo.Attributes = FileAttributes.Hidden` без `|` сбросило бы `ReadOnly`.
+
+Остальные операции с флагами:
+
+```csharp
+// Снять флаг, сохранив остальные
+dirInfo.Attributes &= ~FileAttributes.Hidden;
+
+// Проверить наличие флага
+bool isHidden = dirInfo.Attributes.HasFlag(FileAttributes.Hidden);
+```
 
 [⬆ К содержанию](#содержание)
