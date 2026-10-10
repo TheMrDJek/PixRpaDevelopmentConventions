@@ -12,13 +12,18 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(ROOT, "docs")
 INDEX = os.path.join(DOCS, "rules-index.md")
 RULE = re.compile(r"^## ([A-Z]+-\d+)\. (.+)$")
-LEVEL = re.compile(r"^\*\*Уровень:\*\* (MUST|SHOULD|MAY)\b")
+LEVEL = re.compile(r"^(🔴 \*\*Обязательно\*\*|🟡 \*\*Рекомендуется\*\*|🟢 \*\*По ситуации\*\*)")
+
+# --- Настройки репозитория -------------------------------------------------
+# Разделы реестра правил: (папка внутри docs/, заголовок). Пустая папка — все файлы.
 SECTIONS = [
-    ("01-conventions", "Соглашения"),
-    ("02-guidelines", "Рекомендации по написанию скриптов"),
-    ("03-robot-lifecycle", "Жизненный цикл робота"),
-    ("04-master", "PIX Master"),
+    ("1-project", "1. Создание проекта"),
+    ("2-develop", "2. Разработка"),
+    ("3-integrations", "3. Интеграции"),
+    ("4-master", "4. Публикация и работа в PIX Master"),
 ]
+LEVELS_LINK = "../README.md#уровни-обязательности"
+# ---------------------------------------------------------------------------
 
 
 def slug(title, seen):
@@ -40,8 +45,8 @@ def code_mask(lines):
     return mask
 
 
-def parse(path):
-    """Возвращает (заголовки уровня 2 с якорями, правила)."""
+def parse(path, tag):
+    """Возвращает (заголовки уровня 2 с якорями, правила). tag — ожидаемый тег правил файла."""
     lines = open(path, encoding="utf-8").read().split("\n")
     mask = code_mask(lines)
     seen, headings, rules = {}, [], []
@@ -60,10 +65,13 @@ def parse(path):
             for nxt in lines[i + 1:i + 4]:
                 lm = LEVEL.match(nxt)
                 if lm:
-                    level = lm.group(1)
+                    level = lm.group(1).replace("**", "")
                     break
             if not level:
-                sys.exit(f"{path}: у правила {rm.group(1)} нет строки «**Уровень:**»")
+                sys.exit(f"{path}: у правила {rm.group(1)} нет строки уровня "
+                         "(🔴 **Обязательно** / 🟡 **Рекомендуется** / 🟢 **По ситуации**)")
+            if rm.group(1).rsplit("-", 1)[0] != tag:
+                sys.exit(f"{path}: тег правила {rm.group(1)} должен совпадать с именем файла: {tag}-NN")
             rules.append((rm.group(1), rm.group(2), level, anchor))
         headings.append((m.group(2), anchor, level))
     return headings, rules
@@ -74,7 +82,7 @@ def build_toc(path):
     text = re.sub(r"\n## Содержание\n.*?(?=\n## )", "", text, flags=re.S)
     tmp = path + ".tmp"
     open(tmp, "w", encoding="utf-8", newline="\n").write(text)
-    headings, rules = parse(tmp)
+    headings, rules = parse(tmp, os.path.splitext(os.path.basename(path))[0].upper())
     os.remove(tmp)
     if not headings:
         return text, rules
@@ -93,18 +101,21 @@ def build_index(all_rules):
         "# Реестр правил",
         "",
         "Сводный список всех правил с идентификаторами и уровнями обязательности. "
-        "Уровни описаны в [README](../README.md#уровни-обязательности).",
+        f"Уровни описаны в [README]({LEVELS_LINK}). Тег правила совпадает с именем файла: "
+        "`ERROR-03` — третье правило в файле `error.md`.",
         "",
-        "Ссылайтесь на правило по идентификатору, например в комментарии к Pull Request: «нарушено EXC-03».",
+        "Ссылайтесь на правило по идентификатору, например в комментарии к Pull Request: «нарушено ERROR-03».",
         "",
         "> Файл генерируется командой `python tools/build_docs.py`. Не редактируйте его вручную.",
         "",
     ]
     for folder, title in SECTIONS:
-        rows = [r for r in all_rules if r[0].startswith(folder + "/")]
+        rows = [r for r in all_rules if r[0].startswith(folder + "/" if folder else "")]
         if not rows:
             continue
-        out += [f"## {title}", "", "| ID | Уровень | Правило | Раздел |", "|----|---------|---------|--------|"]
+        if title:
+            out += [f"## {title}", ""]
+        out += ["| ID | Уровень | Правило | Раздел |", "|----|---------|---------|--------|"]
         for rel, section, rid, name, level, anchor in rows:
             out.append(f"| {rid} | {level} | [{name}]({rel}#{anchor}) | [{section}]({rel}) |")
         out.append("")
