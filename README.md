@@ -63,6 +63,17 @@
 | [ИИ и обработка документов](docs/2-develop/ai.md) | `AI` | LLM, OCR, проверка результатов |
 | [Тестирование](docs/2-develop/test.md) | `TEST` | Модульные тесты, бизнес-исключения, сбои окружения |
 
+**Скрипты на C#** — приемы написания кода в активностях и скриптах PIX:
+
+| Раздел | Тег | О чем |
+|--------|-----|-------|
+| [Стиль кода и принципы проектирования](docs/2-develop/csharp/style.md) | `STYLE` | Соглашения C#, DRY, SRP, KISS, YAGNI, аргументы, булевы флаги, коллекции в столбик |
+| [Строки](docs/2-develop/csharp/string.md) | `STRING` | Интерполяция, string.Format, дословные и необработанные строки, StringBuilder |
+| [LINQ](docs/2-develop/csharp/linq.md) | `LINQ` | Форматирование, фильтрация, оптимальные методы, PLINQ, когда цикл лучше |
+| [Условия и условные операторы](docs/2-develop/csharp/condition.md) | `CONDITION` | `?.`, `??`, тернарный оператор, вложенность, отрицательные условия |
+| [Оператор goto](docs/2-develop/csharp/goto.md) | `GOTO` | Чем заменить goto |
+| [Классы файловой системы .NET](docs/2-develop/csharp/filesystem.md) | `FILESYSTEM` | Path, File, FileInfo, DirectoryInfo, атрибуты и `\|=` |
+
 ### 3. Интеграции
 
 | Раздел | Тег | О чем |
@@ -90,7 +101,6 @@
 
 | Репозиторий | Для кого | Что внутри |
 |-------------|----------|------------|
-| [pix-csharp-guide](https://github.com/TheMrDJek/pix-csharp-guide) | Разработчики | Приемы C# в скриптах PIX: строки, LINQ, условия, стиль кода, классы файловой системы |
 | [pix-rpa-process](https://github.com/TheMrDJek/pix-rpa-process) | Команда, аналитики, поддержка, администраторы | Git и код-ревью, жизненный цикл робота (оценка, PDD/SDD, приемка, сопровождение), администрирование PIX Master |
 | [pix-templates](https://github.com/TheMrDJek/pix-templates) | Разработчики | Шаблоны проектов роботов |
 

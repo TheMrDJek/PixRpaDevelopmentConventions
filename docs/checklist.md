@@ -40,7 +40,7 @@
 
 - [ ] Имена соответствуют соглашению — [Именование](1-project/naming.md)
 - [ ] Нет больших блоков кода в активности «Выполнить» — [ACTIVITY-01](2-develop/activity.md#activity-01-не-размещайте-большой-код-в-активности-выполнить)
-- [ ] Вложенность условий не больше 2–3 уровней — [CONDITION-02](https://github.com/TheMrDJek/pix-csharp-guide/blob/main/docs/condition.md#condition-02-избегайте-глубоких-вложений-в-скриптах)
+- [ ] Вложенность условий не больше 2–3 уровней — [CONDITION-02](2-develop/csharp/condition.md#condition-02-избегайте-глубоких-вложений-в-скриптах)
 
 ## Сопровождение
 
