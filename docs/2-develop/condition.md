@@ -594,7 +594,7 @@ public string ProcessOrder(Order order)
 }
 ```
 
-#### 3. Использование pattern matching (C# 7.0 и выше)
+#### 3. Использование pattern matching
 
 ```csharp
 // ✅ Хорошо: pattern matching для обработки разных типов
