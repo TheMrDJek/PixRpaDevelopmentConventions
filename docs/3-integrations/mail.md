@@ -19,7 +19,7 @@
 |--------|----------|------------------|
 | Любой почтовый сервер | IMAP — чтение, SMTP — отправка | Активности PIX RPA для IMAP/SMTP или библиотека [MailKit](https://github.com/jstedfast/MailKit) |
 | Microsoft Exchange (локальный) | EWS (Exchange Web Services) | Активности PIX RPA для Exchange или библиотека `Microsoft.Exchange.WebServices` |
-| Microsoft 365 / Exchange Online | Microsoft Graph API | REST-запросы через `HttpClient` (см. [INTEGRATION-04](integration.md#integration-04-выполняйте-http-запросы-через-httpclient)) |
+| Microsoft 365 / Exchange Online | Microsoft Graph API | Активностей для Graph в PIX RPA нет — REST-запросы через `HttpClient` (см. [INTEGRATION-04](integration.md#integration-04-выполняйте-http-запросы-через-httpclient)) |
 
 > [!WARNING]
 > Microsoft отключает EWS в Exchange Online. Для облачной почты Microsoft 365 используйте Microsoft Graph; EWS остается вариантом для локального Exchange Server.
