@@ -88,7 +88,7 @@ def build_toc(path):
         return text, rules
     toc = ["## Содержание", ""]
     for title, anchor, level in headings:
-        toc.append(f"- [{title}](#{anchor})" + (f" — {level}" if level else ""))
+        toc.append(f"- [{title}](#{anchor})" + (f" ({level})" if level else ""))
     lines = text.split("\n")
     mask = code_mask(lines)
     first = next(i for i, l in enumerate(lines) if not mask[i] and l.startswith("## "))

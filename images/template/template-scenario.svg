@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="690" viewBox="0 0 850 690" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4A5568"/></marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C0392B"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3B6FD8"/></marker>
+    <marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7C5CC4"/></marker>
+  </defs>
+  <rect width="850" height="690" fill="#FFFFFF"/>
+  <rect x="15" y="15" width="470" height="520" rx="14" fill="#F7F9FC" stroke="#8AA0C8" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="35" y="45" text-anchor="start" font-size="17" font-weight="700" fill="#2D3748">Сценарий AddOrderItem</text>
+  <text x="35" y="65" text-anchor="start" font-size="12" fill="#4A5568">States/Process/Transactions/AddOrderItem</text>
+  <rect x="75" y="85" width="390" height="60" rx="10" fill="#FFF4D6" stroke="#D9A21B" stroke-width="2"/>
+  <text x="89" y="113" text-anchor="start" font-size="15" font-weight="700" fill="#7A5300">1. OpenOrderCard</text>
+  <text x="89" y="129" text-anchor="start" font-size="12" fill="#7A5300">Shared: найти и открыть заказ</text>
+  <rect x="75" y="172" width="390" height="60" rx="10" fill="#FFF4D6" stroke="#D9A21B" stroke-width="2"/>
+  <text x="89" y="200" text-anchor="start" font-size="15" font-weight="700" fill="#7A5300">2. CheckStock</text>
+  <text x="89" y="216" text-anchor="start" font-size="12" fill="#7A5300">Shared: проверить остаток на складе</text>
+  <rect x="75" y="259" width="390" height="60" rx="10" fill="#FFFFFF" stroke="#D9A21B" stroke-width="2"/>
+  <text x="89" y="287" text-anchor="start" font-size="15" font-weight="700" fill="#7A5300">3. AddItemAndCheck</text>
+  <text x="89" y="303" text-anchor="start" font-size="12" fill="#7A5300">папка операции: добавить позицию и проверить</text>
+  <rect x="75" y="346" width="390" height="60" rx="10" fill="#FFF4D6" stroke="#D9A21B" stroke-width="2"/>
+  <text x="89" y="374" text-anchor="start" font-size="15" font-weight="700" fill="#7A5300">4. PostOrder</text>
+  <text x="89" y="390" text-anchor="start" font-size="12" fill="#7A5300">Shared: провести заказ и поставить метку</text>
+  <rect x="75" y="433" width="390" height="60" rx="10" fill="#E2F5E8" stroke="#2E9E5B" stroke-width="2"/>
+  <text x="89" y="461" text-anchor="start" font-size="15" font-weight="700" fill="#1F6B3E">5. ExportOrderReport</text>
+  <text x="89" y="477" text-anchor="start" font-size="12" fill="#1F6B3E">Infrastructure/1C: сохранить отчет по заказу</text>
+  <line x1="270" y1="145" x2="270" y2="170" stroke="#4A5568" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="270" y1="232" x2="270" y2="257" stroke="#4A5568" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="270" y1="319" x2="270" y2="344" stroke="#4A5568" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="270" y1="406" x2="270" y2="431" stroke="#4A5568" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="270" y1="493" x2="270" y2="558" stroke="#4A5568" stroke-width="2" marker-end="url(#ag)"/>
+  <rect x="75" y="560" width="390" height="66" rx="10" fill="#E3EEFF" stroke="#3B6FD8" stroke-width="2"/>
+  <text x="89" y="582" text-anchor="start" font-size="14" font-weight="700" fill="#1E3A8A">Блок Route в main.pix</text>
+  <text x="89" y="599" text-anchor="start" font-size="12" fill="#1E3A8A">пишет ответ: результат или причину отказа,</text>
+  <text x="89" y="615" text-anchor="start" font-size="12" fill="#1E3A8A">берет следующую транзакцию</text>
+  <rect x="560" y="85" width="210" height="60" rx="10" fill="#E2F5E8" stroke="#2E9E5B" stroke-width="2"/>
+  <text x="665.0" y="112" text-anchor="middle" font-size="14" font-weight="700" fill="#1F6B3E">Infrastructure/1C</text>
+  <text x="665.0" y="129" text-anchor="middle" font-size="12" fill="#1F6B3E">FindOrder</text>
+  <line x1="465" y1="115" x2="558" y2="115" stroke="#4A5568" stroke-width="2" marker-end="url(#ag)"/>
+  <rect x="560" y="172" width="210" height="60" rx="10" fill="#E2F5E8" stroke="#2E9E5B" stroke-width="2"/>
+  <text x="665.0" y="199" text-anchor="middle" font-size="14" font-weight="700" fill="#1F6B3E">Infrastructure/Wms</text>
+  <text x="665.0" y="216" text-anchor="middle" font-size="12" fill="#1F6B3E">GetStockBalance</text>
+  <line x1="465" y1="202" x2="558" y2="202" stroke="#4A5568" stroke-width="2" marker-end="url(#ag)"/>
+  <rect x="560" y="346" width="210" height="60" rx="10" fill="#E2F5E8" stroke="#2E9E5B" stroke-width="2"/>
+  <text x="665.0" y="373" text-anchor="middle" font-size="14" font-weight="700" fill="#1F6B3E">Infrastructure/1C</text>
+  <text x="665.0" y="390" text-anchor="middle" font-size="12" fill="#1F6B3E">PostDocument</text>
+  <line x1="465" y1="376" x2="558" y2="376" stroke="#4A5568" stroke-width="2" marker-end="url(#ag)"/>
+  <rect x="560" y="433" width="270" height="60" rx="10" fill="#DDF3F2" stroke="#2B8A8A" stroke-width="2"/>
+  <text x="695.0" y="460" text-anchor="middle" font-size="13" font-weight="700" fill="#1D5E5E">Метка «проведено» в элементе</text>
+  <text x="695.0" y="476" text-anchor="middle" font-size="12" fill="#1D5E5E">при повторе шаги 1–4 пропускаются</text>
+  <path d="M 465 386 C 520 386, 510 463, 558 463" fill="none" stroke="#4A5568" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ag)"/>
+  <path d="M 75 115 L 45 115 L 45 593 L 73 593" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+  <line x1="75" y1="202" x2="45" y2="202" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="0" y="0" transform="translate(38,400) rotate(-90)" text-anchor="middle" font-size="12" fill="#C0392B" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">бизнес-исключение</text>
+  <rect x="15" y="650" width="36" height="22" rx="5" fill="#FFF4D6" stroke="#D9A21B" stroke-width="2"/>
+  <text x="59" y="666" text-anchor="start" font-size="13" fill="#2D3748">шаг из Shared</text>
+  <rect x="180.60000000000002" y="650" width="36" height="22" rx="5" fill="#FFFFFF" stroke="#D9A21B" stroke-width="2"/>
+  <text x="224.60000000000002" y="666" text-anchor="start" font-size="13" fill="#2D3748">шаг операции</text>
+  <rect x="339.0" y="650" width="36" height="22" rx="5" fill="#E2F5E8" stroke="#2E9E5B" stroke-width="2"/>
+  <text x="383.0" y="666" text-anchor="start" font-size="13" fill="#2D3748">адаптер</text>
+  <rect x="461.4" y="650" width="36" height="22" rx="5" fill="#DDF3F2" stroke="#2B8A8A" stroke-width="2"/>
+  <text x="505.4" y="666" text-anchor="start" font-size="13" fill="#2D3748">элемент очереди</text>
+  <line x1="641.4" y1="661" x2="677.4" y2="661" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+  <text x="685.4" y="666" text-anchor="start" font-size="13" fill="#2D3748">бизнес-исключение</text>
+</svg>

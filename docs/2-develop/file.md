@@ -4,11 +4,11 @@
 
 ## Содержание
 
-- [FILE-01. Не используйте жестко заданные пути и конкатенацию строк для путей](#file-01-не-используйте-жестко-заданные-пути-и-конкатенацию-строк-для-путей) — 🔴 Обязательно
-- [FILE-02. Управляйте временными файлами](#file-02-управляйте-временными-файлами) — 🔴 Обязательно
-- [FILE-03. Копируйте файлы перед обработкой](#file-03-копируйте-файлы-перед-обработкой) — 🟡 Рекомендуется
-- [FILE-04. Используйте классы Path, Directory и File](#file-04-используйте-классы-path-directory-и-file) — 🟡 Рекомендуется
-- [FILE-05. Выбирайте между File/Directory и FileInfo/DirectoryInfo по количеству операций](#file-05-выбирайте-между-filedirectory-и-fileinfodirectoryinfo-по-количеству-операций) — 🟡 Рекомендуется
+- [FILE-01. Не используйте жестко заданные пути и конкатенацию строк для путей](#file-01-не-используйте-жестко-заданные-пути-и-конкатенацию-строк-для-путей) (🔴 Обязательно)
+- [FILE-02. Управляйте временными файлами](#file-02-управляйте-временными-файлами) (🔴 Обязательно)
+- [FILE-03. Копируйте файлы перед обработкой](#file-03-копируйте-файлы-перед-обработкой) (🟡 Рекомендуется)
+- [FILE-04. Используйте классы Path, Directory и File](#file-04-используйте-классы-path-directory-и-file) (🟡 Рекомендуется)
+- [FILE-05. Выбирайте между File/Directory и FileInfo/DirectoryInfo по количеству операций](#file-05-выбирайте-между-filedirectory-и-fileinfodirectoryinfo-по-количеству-операций) (🟡 Рекомендуется)
 
 ## FILE-01. Не используйте жестко заданные пути и конкатенацию строк для путей
 
@@ -350,7 +350,7 @@ var csvData = ProcessFileWithCopy(csvPath, path => ReadCsvFile(path));
 
 🟡 **Рекомендуется**
 
-Для работы с путями, папками и файлами используйте стандартные классы .NET, а не собственные функции на строках. Полные списки методов — в документации Microsoft: [Path](https://learn.microsoft.com/ru-ru/dotnet/api/system.io.path), [Directory](https://learn.microsoft.com/ru-ru/dotnet/api/system.io.directory), [File](https://learn.microsoft.com/ru-ru/dotnet/api/system.io.file).
+Для работы с путями, папками и файлами используйте стандартные классы .NET, а не собственные функции на строках. Полные списки методов есть в документации Microsoft: [Path](https://learn.microsoft.com/ru-ru/dotnet/api/system.io.path), [Directory](https://learn.microsoft.com/ru-ru/dotnet/api/system.io.directory), [File](https://learn.microsoft.com/ru-ru/dotnet/api/system.io.file).
 
 Методы, которые чаще всего нужны роботу:
 
@@ -359,7 +359,7 @@ var csvData = ProcessFileWithCopy(csvPath, path => ReadCsvFile(path));
 | Собрать путь из частей | `Path.Combine(folder, fileName)` | [FILE-01](#file-01-не-используйте-жестко-заданные-пути-и-конкатенацию-строк-для-путей) |
 | Получить имя или расширение файла | `Path.GetFileName`, `Path.GetFileNameWithoutExtension`, `Path.GetExtension` | — |
 | Папка для временных файлов | `Path.GetTempPath()` | [FILE-02](#file-02-управляйте-временными-файлами) |
-| Создать папку, если ее нет | `Directory.CreateDirectory(path)` — не выбрасывает исключение, если папка уже есть | [ERROR-03](error.md#error-03-не-оставляйте-catch-пустым-и-не-используйте-trycatchfinally-в-бизнес-логике) |
+| Создать папку, если ее нет | `Directory.CreateDirectory(path)`: не выбрасывает исключение, если папка уже есть | [ERROR-03](error.md#error-03-не-оставляйте-catch-пустым-и-не-используйте-trycatchfinally-в-бизнес-логике) |
 | Проверить наличие файла перед чтением | `File.Exists(path)` | [ERROR-03](error.md#error-03-не-оставляйте-catch-пустым-и-не-используйте-trycatchfinally-в-бизнес-логике) |
 | Скопировать файл перед обработкой | `File.Copy(source, temp, overwrite: true)` | [FILE-03](#file-03-копируйте-файлы-перед-обработкой) |
 | Перебрать файлы по маске | `Directory.GetFiles(folder, "*.pdf")` | — |
@@ -385,7 +385,7 @@ var pdfFiles = Directory.GetFiles(inputFolder)
 
 | | Статические классы `File`, `Directory` | Экземплярные классы `FileInfo`, `DirectoryInfo` |
 |---|---|---|
-| Вызов | `File.Exists(path)` — путь передается в каждый вызов | `var info = new FileInfo(path); info.Exists` — объект хранит путь |
+| Вызов | `File.Exists(path)`: путь передается в каждый вызов | `var info = new FileInfo(path); info.Exists`: объект хранит путь |
 | Проверки безопасности и чтение атрибутов | При каждом вызове | Один раз при первом обращении, затем значения кешируются |
 | Когда удобнее | Одна-две операции с файлом | Несколько операций или чтение нескольких свойств одного файла, перебор содержимого папки |
 
@@ -410,7 +410,7 @@ var oldFiles = new DirectoryInfo(archiveFolder)
 
 ### Работа с атрибутами: оператор `|=`
 
-Атрибуты файлов и папок (`FileAttributes`) — это битовые флаги: у одной папки может быть одновременно несколько атрибутов. Чтобы добавить атрибут, не сбросив уже установленные, используйте оператор побитового ИЛИ с присваиванием `|=`:
+Атрибуты файлов и папок (`FileAttributes`) задаются битовыми флагами: у одной папки может быть одновременно несколько атрибутов. Чтобы добавить атрибут, не сбросив уже установленные, используйте оператор побитового ИЛИ с присваиванием `|=`:
 
 ```csharp
 var dirInfo = new DirectoryInfo(tempFolder);

@@ -82,9 +82,12 @@
 
 По каждому файлу — [чек-лист вычитки](#чек-лист-вычитки-файла). Ниже — что проверить сверх него.
 
-- [ ] **2.1. Создание проекта** (19 правил)
-  - [ ] [project.md](docs/1-project/project.md) (7) — типы процессов, недостатки State Machine (PROJECT-02), Dispatcher/Performer (PROJECT-06), Transaction Script (PROJECT-07). 🚧 «Другие шаблоны» — оставить до этапа 5
+- [ ] **2.1. Создание проекта** (17 правил)
+  - [ ] [project.md](docs/1-project/project.md) (3) и [template.md](docs/1-project/template.md) (2) — раздел разделен на «Проект робота» и «Шаблон на State Machine». 🚧 «Другие шаблоны» — оставить до этапа 5
+    > Сделано: сквозной пример `Orders.ProcessOrderRequest`, схемы вместо mermaid и текстовых примеров, переменные `main.pix`, уровни повторов; Dispatcher / Performer и Transaction Script стали справочными разделами. Осталось от автора: вычитать текст; решить по 10 пунктам «Почему» для TEMPLATE-01; скриншот пары блоков `Init` / `Init - Route` из main.pix для TEMPLATE-02; название активности `GoToStep` в панели Studio; работа с очередью — только через `Infrastructure/PixMaster` или активностями прямо из состояний
+    > PROJECT-03 переписан по просьбе автора: библиотеки разрешены, правило о связанности, которую они добавляют. Осталось: вычитка автором
   - [ ] [naming.md](docs/1-project/naming.md) (4) — **новые правила**, написаны без вас; снять 🚧 после проверки
+    > Автор напишет сам: в именах точка вместо `_` (`SalesOrders.ProcessOrderRequest`). project.md уже переведен. После правила поправить NAMING-01 и примеры с `_` в config.md, naming.md, string.md, test.md (TEST-05), variable.md, queue.md, master.md («Общий формат имен») и схему `images/master/master-components.svg`
   - [ ] [config.md](docs/1-project/config.md) (8) — собран из четырех источников (ассеты, секреты в Git, жесткое кодирование, именование ассетов): порядок правил, повторы
     > Сделано: раздел «Что такое ассет» по документации PIX, типы ассетов в CONFIG-01, новое CONFIG-08. Осталось: остальной текст файла под правила стиля
 - [ ] **2.2. Как писать код, часть 1** (27 правил)
@@ -107,13 +110,13 @@
   - [ ] [ai.md](docs/2-develop/ai.md) (6) — 🚧; решить, нужен ли раздел сейчас
   - [ ] [test.md](docs/2-develop/test.md) (5) — 🚧
 - [ ] **2.6. Интеграции** (25 правил)
-  - [ ] [queue.md](docs/3-integrations/queue.md) (8) — правила кода и именование очередей в одном файле
+  - [ ] [queue.md](docs/3-integrations/queue.md) (12) — правила кода и именование очередей в одном файле. QUEUE-09–12 и раздел «Об очередях PIX Master» новые. QUEUE-04: экспоненциальная задержка, а в PIX она фиксированная. QUEUE-07: приоритеты 1–10, а в PIX Низкий / Средний / Высокий. QUEUE-10: какой активностью робот пишет метку в элемент
   - [ ] [db.md](docs/3-integrations/db.md) (5)
   - [ ] [integration.md](docs/3-integrations/integration.md) (4)
   - [ ] [mail.md](docs/3-integrations/mail.md) (4) — предупреждение об отключении EWS в Exchange Online
   - [ ] [excel.md](docs/3-integrations/excel.md) (4) — предупреждение о лицензии EPPlus
 - [ ] **2.7. PIX Master** (9 правил)
-  - [ ] [master.md](docs/4-master/master.md) (6) — таблица «Общий формат имен» (строка про хосты), контуры DEV/UAT/PROD, примеры MSK/SPB вместо NYC/LON, схема mermaid
+  - [ ] [master.md](docs/4-master/master.md) (6) — контуры DEV/UAT/PROD, примеры MSK/SPB вместо NYC/LON, схема mermaid. Таблица «Связь между компонентами» — по цепочке задача → проект на агенте → машина. MASTER-04 пересекается с QUEUE-12
   - [ ] [publish.md](docs/4-master/publish.md) (3)
 - [ ] **2.8. Сквозная проверка**
   - [ ] [Реестр правил](docs/rules-index.md) — общий баланс уровней: сейчас 64 🔴, 70 🟡, 6 🟢. Не слишком ли много обязательных

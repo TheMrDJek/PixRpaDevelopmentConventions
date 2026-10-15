@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="990" height="500" viewBox="0 0 990 500" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4A5568"/></marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C0392B"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3B6FD8"/></marker>
+    <marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7C5CC4"/></marker>
+  </defs>
+  <rect width="990" height="500" fill="#FFFFFF"/>
+  <rect x="15" y="150" width="125" height="50" rx="25.0" fill="#FFFFFF" stroke="#555555" stroke-width="2"/>
+  <text x="77.5" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#2D3748">Запуск задачи</text>
+  <rect x="180" y="135" width="180" height="80" rx="10" fill="#E3EEFF" stroke="#3B6FD8" stroke-width="2"/>
+  <text x="270.0" y="166" text-anchor="middle" font-size="17" font-weight="700" fill="#1E3A8A">Init</text>
+  <text x="270.0" y="183" text-anchor="middle" font-size="12" fill="#1E3A8A">конфигурация, проверки,</text>
+  <text x="270.0" y="199" text-anchor="middle" font-size="12" fill="#1E3A8A">запуск приложений</text>
+  <rect x="460" y="135" width="190" height="80" rx="10" fill="#E3EEFF" stroke="#3B6FD8" stroke-width="2"/>
+  <text x="555.0" y="166" text-anchor="middle" font-size="17" font-weight="700" fill="#1E3A8A">Get Transaction</text>
+  <text x="555.0" y="183" text-anchor="middle" font-size="12" fill="#1E3A8A">сигнал остановки,</text>
+  <text x="555.0" y="199" text-anchor="middle" font-size="12" fill="#1E3A8A">элемент очереди</text>
+  <rect x="790" y="135" width="185" height="80" rx="10" fill="#E3EEFF" stroke="#3B6FD8" stroke-width="2"/>
+  <text x="882.5" y="166" text-anchor="middle" font-size="17" font-weight="700" fill="#1E3A8A">End Process</text>
+  <text x="882.5" y="183" text-anchor="middle" font-size="12" fill="#1E3A8A">закрыть приложения,</text>
+  <text x="882.5" y="199" text-anchor="middle" font-size="12" fill="#1E3A8A">удалить временные файлы</text>
+  <rect x="460" y="345" width="190" height="80" rx="10" fill="#E3EEFF" stroke="#3B6FD8" stroke-width="2"/>
+  <text x="555.0" y="376" text-anchor="middle" font-size="17" font-weight="700" fill="#1E3A8A">Process Transaction</text>
+  <text x="555.0" y="393" text-anchor="middle" font-size="12" fill="#1E3A8A">сценарий по типу</text>
+  <text x="555.0" y="409" text-anchor="middle" font-size="12" fill="#1E3A8A">транзакции</text>
+  <line x1="140" y1="175" x2="178" y2="175" stroke="#3B6FD8" stroke-width="2" marker-end="url(#ab)"/>
+  <line x1="360" y1="175" x2="458" y2="175" stroke="#3B6FD8" stroke-width="2" marker-end="url(#ab)"/>
+  <text x="409" y="166" text-anchor="middle" font-size="12" fill="#1E3A8A" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">успех</text>
+  <line x1="650" y1="175" x2="788" y2="175" stroke="#3B6FD8" stroke-width="2" marker-end="url(#ab)"/>
+  <text x="719" y="166" text-anchor="middle" font-size="12" fill="#1E3A8A" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">нет транзакций</text>
+  <text x="719" y="194" text-anchor="middle" font-size="12" fill="#1E3A8A" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">или остановка</text>
+  <line x1="525" y1="215" x2="525" y2="343" stroke="#3B6FD8" stroke-width="2" marker-end="url(#ab)"/>
+  <text x="517" y="285" text-anchor="end" font-size="12" fill="#1E3A8A" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">есть транзакция</text>
+  <line x1="585" y1="345" x2="585" y2="217" stroke="#3B6FD8" stroke-width="2" marker-end="url(#ab)"/>
+  <text x="593" y="278" text-anchor="start" font-size="12" fill="#1E3A8A" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">успех или</text>
+  <text x="593" y="294" text-anchor="start" font-size="12" fill="#1E3A8A" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">бизнес-исключение</text>
+  <path d="M 240 135 C 222 85, 305 85, 292 133" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+  <text x="268" y="80" text-anchor="middle" font-size="12" fill="#C0392B" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">попытки есть</text>
+  <path d="M 335 135 C 430 25, 800 25, 865 133" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+  <text x="600" y="40" text-anchor="middle" font-size="12" fill="#C0392B" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">попытки исчерпаны: письмо поддержке</text>
+  <path d="M 620 135 C 670 98, 770 98, 815 133" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+  <text x="718" y="98" text-anchor="middle" font-size="12" fill="#C0392B" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">ошибка</text>
+  <path d="M 460 385 C 330 385, 275 320, 270 217" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+  <text x="300" y="410" text-anchor="middle" font-size="12" fill="#C0392B" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">попытки есть</text>
+  <path d="M 650 385 C 800 385, 880 320, 882 217" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+  <text x="840" y="410" text-anchor="middle" font-size="12" fill="#C0392B" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">попытки исчерпаны:</text>
+  <text x="840" y="426" text-anchor="middle" font-size="12" fill="#C0392B" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">письмо поддержке</text>
+  <line x1="15" y1="471" x2="51" y2="471" stroke="#3B6FD8" stroke-width="2" marker-end="url(#ab)"/>
+  <text x="59" y="476" text-anchor="start" font-size="13" fill="#2D3748">штатный переход</text>
+  <line x1="195.0" y1="471" x2="231.0" y2="471" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+  <text x="239.0" y="476" text-anchor="start" font-size="13" fill="#2D3748">переход после технического исключения</text>
+</svg>
