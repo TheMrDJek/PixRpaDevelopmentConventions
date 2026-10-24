@@ -27,6 +27,7 @@
 | PROJECT-03 | 🟡 Рекомендуется | [Взвешивайте связанность, прежде чем подключать библиотеку](1-project/project.md#project-03-взвешивайте-связанность-прежде-чем-подключать-библиотеку) | [Проект робота](1-project/project.md) |
 | TEMPLATE-01 | 🔴 Обязательно | [Разделяйте проект на слои](1-project/template.md#template-01-разделяйте-проект-на-слои) | [Шаблон на State Machine](1-project/template.md) |
 | TEMPLATE-02 | 🔴 Обязательно | [Используйте состояния State Machine по назначению](1-project/template.md#template-02-используйте-состояния-state-machine-по-назначению) | [Шаблон на State Machine](1-project/template.md) |
+| TEMPLATE-03 | 🔴 Обязательно | [Проверяйте доступ ко всем системам робота в Init](1-project/template.md#template-03-проверяйте-доступ-ко-всем-системам-робота-в-init) | [Шаблон на State Machine](1-project/template.md) |
 
 ## 2. Разработка
 
