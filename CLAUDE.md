@@ -17,7 +17,7 @@
 - `docs/checklist.md` — чек-лист разработчика и ревьюера
 - `docs/rules-index.md` — реестр правил, **генерируется**, вручную не править
 - `docs/glossary.md` — глоссарий
-- `templates/robot.gitignore`, `tools/` (`render_svg.py` пересобирает PNG схем из SVG)
+- `templates/robot.gitignore`, `tools/` (`export_diagrams.py` выгружает PNG схем из `images/diagrams.drawio`)
 - `.claude/skills/stop-slop/` — навык стиля текста (адаптация stop-slop, MIT)
 - `images/<имя файла раздела>/` — скриншоты и схемы: картинки для `error.md` лежат в `images/error/`
 
@@ -79,7 +79,7 @@ CI (`.github/workflows/docs.yml`) запускает `build_docs.py --check` и 
 - SQL — только параметры, никакой интерполяции (DB-05)
 - Сервер, на котором работают роботы, называется **машиной**, как в PIX Master; «хост» и «сервер робота» — только синонимы в глоссарии
 - Именование компонентов PIX Master — по таблице «Общий формат имен» в `docs/4-master/master.md`
-- Схемы — картинки, без mermaid: исходник SVG и PNG рядом в `images/<раздел>/`, PNG собирается `python tools/render_svg.py`. Цвета и оформление — в `CONTRIBUTING.md`, раздел «Схемы»
+- Схемы — картинки, без mermaid: исходник всех схем `images/diagrams.drawio`, лист на схему, PNG выгружается в `images/<раздел>/` командой `python tools/export_diagrams.py` (нужен draw.io Desktop). Цвета и оформление — в `CONTRIBUTING.md`, раздел «Схемы»
 - PIX Master для робота — внешняя система: работа с ним, как с 1С или почтой, лежит в `Infrastructure/PixMaster`
 - Готовые шаблоны и примеры часто встречающихся скриптов лежат в репозитории [pix-templates](https://github.com/TheMrDJek/pix-templates); project.md ссылается на них без оговорок, своего каталога шаблонов в соглашении нет. Соглашение описывает итоговую версию, шаблоны приводятся к нему после ревью раздела «Создание проекта»
 - Заголовок README: «Соглашения и практики разработки роботов PIX RPA»

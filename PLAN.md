@@ -50,7 +50,7 @@
 ## Этап 0. Подготовка
 
 - [x] **0.1.** Ветки `docsv2` и `feat/dev-path` отправлены, PR `feat/dev-path` → `docsv2` слит, CI зеленый
-- [ ] **0.2.** Закоммитить в `review/v2` переход схем на draw.io (`images/diagrams.drawio`, `tools/export_diagrams.py`, удаление SVG и `render_svg.py`) и подтянуть его в рабочую ветку
+- [x] **0.2.** Переход схем на draw.io (`images/diagrams.drawio`, `tools/export_diagrams.py`, удаление SVG и `render_svg.py`) перенесен в рабочую ветку из незакоммиченных правок `review/v2`
 - [ ] **0.3.** Открыть **черновой** PR `docsv2` → `master`: в нем виден весь объем версии 2.0. Можно отложить до шага 3.4
 
 ---
