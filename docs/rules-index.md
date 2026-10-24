@@ -26,8 +26,8 @@
 | PROJECT-02 | 🔴 Обязательно | [Храните ресурсы робота в самом проекте](1-project/project.md#project-02-храните-ресурсы-робота-в-самом-проекте) | [Проект робота](1-project/project.md) |
 | PROJECT-03 | 🔴 Обязательно | [Согласуйте подключение собственной библиотеки](1-project/project.md#project-03-согласуйте-подключение-собственной-библиотеки) | [Проект робота](1-project/project.md) |
 | TEMPLATE-01 | 🔴 Обязательно | [Раскладывайте скрипты по папкам по роли](1-project/template.md#template-01-раскладывайте-скрипты-по-папкам-по-роли) | [Шаблоны роботов на State Machine](1-project/template.md) |
-| TEMPLATE-02 | 🔴 Обязательно | [Используйте состояния State Machine по назначению](1-project/template.md#template-02-используйте-состояния-state-machine-по-назначению) | [Шаблоны роботов на State Machine](1-project/template.md) |
-| TEMPLATE-03 | 🔴 Обязательно | [Проверяйте доступ ко всем системам робота в Init](1-project/template.md#template-03-проверяйте-доступ-ко-всем-системам-робота-в-init) | [Шаблоны роботов на State Machine](1-project/template.md) |
+| TEMPLATE-02 | 🔴 Обязательно | [Выполняйте в каждом состоянии только его работу](1-project/template.md#template-02-выполняйте-в-каждом-состоянии-только-его-работу) | [Шаблоны роботов на State Machine](1-project/template.md) |
+| TEMPLATE-03 | 🔴 Обязательно | [Проверяйте в Init настройки и доступ ко всем системам робота](1-project/template.md#template-03-проверяйте-в-init-настройки-и-доступ-ко-всем-системам-робота) | [Шаблоны роботов на State Machine](1-project/template.md) |
 
 ## 2. Разработка
 
