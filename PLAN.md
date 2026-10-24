@@ -75,7 +75,8 @@
 - [x] [template.md](docs/1-project/template.md) (3)
   > Сделано: сквозной пример `Orders.ProcessOrderRequest`, схемы вместо mermaid, переменные `main.pix`, уровни повторов
   > Сделано в проходе, апрув автора: файл называется «Шаблоны роботов на State Machine» и описывает, как обычно устроены шаблоны команды, без названия шаблона PIX Studio. TEMPLATE-01 «Раскладывайте скрипты по папкам по роли»: список папок вместо таблицы слоев, граница «как» (`Infrastructure`) и «что и когда» (`States`), любое действие в системе лежит в `Infrastructure`, файлы вне проекта в `Infrastructure/FileSystem`, короткое состояние и End Process остаются контейнером в `main.pix`. TEMPLATE-02 «Выполняйте в каждом состоянии только его работу»: классический шаблон из четырех состояний с повторами, разделы по состояниям, Get Transaction только берет элемент (папка `GetTransaction`), Process Transaction доводит транзакцию до конца, единая таблица переходов, гибкость повторов, пометка о том, когда не закрывать приложение, раздел «Что дает». TEMPLATE-03 «Проверяйте в Init настройки и доступ ко всем системам робота»: проверка ассетов на пустоту и формат, проверки по типам систем, реакция на нехватку доступа и ошибку настройки. Справки «Сценарий транзакции» (разбор `AddOrderItem` по шагам, источник у Фаулера) и «Варианты процесса: стратегия» (движок и независимые стратегии, пример с парсингом 100 сайтов, жесткий контракт, вызов по собранному пути). Схемы перерисованы, добавлен лист `template-strategy`, штамп убран со всех листов
-- [ ] [naming.md](docs/1-project/naming.md) (4): правила написаны без автора
+- [~] [naming.md](docs/1-project/naming.md) (4): правила написаны без автора
+  > Правки автора внесены: формат `{Домен}.{Процесс}` через точку, `_` только перед контуром и в тестах, папки состояний перечислены, имя скрипта понятно без пути, `Validate…` для проверок с исключением, плашка 🚧 снята. Ждет апрува автора
 - [ ] [config.md](docs/1-project/config.md) (8): собран из четырех источников, проверить порядок правил и повторы
   > Сделано: раздел «Что такое ассет» по документации PIX, типы ассетов в CONFIG-01, CONFIG-08
 
@@ -195,7 +196,8 @@
 
 - [x] `PIX` [TEMPLATE-02](docs/1-project/template.md#template-02-выполняйте-в-каждом-состоянии-только-его-работу): название активности `GoToStep` в панели Studio
   > Закрыто: в PIX Studio две активности, «Перейти на шаг» и «Условный переход к шагу»; в шаблонах используется первая. `GoToStep` в template.md и project.md заменен на «Перейти на шаг»
-- [ ] `PIX` [NAMING-03](docs/1-project/naming.md#naming-03-называйте-скрипт-глаголом-и-объектом): скрипты в проекте хранятся как файлы `.pix`?
+- [x] `PIX` [NAMING-03](docs/1-project/naming.md#naming-03-называйте-скрипт-глаголом-и-объектом): скрипты в проекте хранятся как файлы `.pix`?
+  > Закрыто: да, скрипты это файлы `.pix` (`main.pix`, `ExtractPrices.pix` в template.md)
 - [ ] `PIX` [Активности для ассетов](docs/1-project/config.md#ассет-в-роботе): точные названия в панели Studio
   > Описания семи активностей получены, в таблице пока описательные названия («Получение данных», «Получение учетных данных»)
 - [ ] `PIX` [CONFIG-08](docs/1-project/config.md#config-08-получайте-ассеты-по-ключу): у одного ассета на разных контурах разный ID?
@@ -226,7 +228,10 @@
 
 ### Решения и ИБ
 
-- [ ] `РЕШЕНИЕ` [NAMING](docs/1-project/naming.md): в именах точка вместо `_` (`SalesOrders.ProcessOrderRequest`). Правило автор пишет сам, project.md уже переведен. После правила поправить NAMING-01 и примеры с `_` в config.md, naming.md, string.md, test.md (TEST-05), variable.md, queue.md (QUEUE-05), master.md (MASTER-03, «Общий формат имен») и лист `master / master-components` в `images/diagrams.drawio`
+- [x] `РЕШЕНИЕ` [NAMING](docs/1-project/naming.md): в именах точка вместо `_` (`SalesOrders.ProcessOrderRequest`). Правило автор пишет сам, project.md уже переведен. После правила поправить NAMING-01 и примеры с `_` в config.md, naming.md, string.md, test.md (TEST-05), variable.md, queue.md (QUEUE-05), master.md (MASTER-03, «Общий формат имен») и лист `master / master-components` в `images/diagrams.drawio`
+  > Решено автором: точка разделяет домены в имени проекта, репозитория и задачи (`Orders.ProcessOrderRequest`). `_` только перед суффиксом контура в ассетах и очередях (`Orders.ProcessOwnerEmails_Prod`, суффиксы `_Dev`, `_Uat`, `_Prod`) и в именах тестов. Остальные имена: латиница и цифры, PascalCase. naming.md переведен
+- [ ] `АКТУАЛЬНО` Имена по [NAMING-01](docs/1-project/naming.md#naming-01-называйте-проект-и-репозиторий-по-домену-и-процессу) и [NAMING-04](docs/1-project/naming.md#naming-04-используйте-в-именах-только-латиницу-и-цифры): перевести config.md (CONFIG-06: `Param_`/`Cred_`/`Config_`, «имя ассета одинаково на всех контурах»), master.md (MASTER-03, «Общий формат имен», имена агентов), queue.md (QUEUE-05), string.md, variable.md и лист `master / master-components` в `images/diagrams.drawio`
+- [ ] `АКТУАЛЬНО` pix-templates под NAMING: папки `1 Init`, `2 Get Transaction` в `Init`, `GetTransaction`; `PIX Master`, `SQL Server` в `PixMaster`, `SqlServer`; `error_notification.html`, `email_subjects.txt` в PascalCase; суффиксы контура `_dev`/`_test`/`_prod` и `DevTest`/`Prod` в `_Dev`, `_Uat`, `_Prod`
 - [x] `РЕШЕНИЕ` [TEMPLATE-01](docs/1-project/template.md#template-01-раскладывайте-скрипты-по-папкам-по-роли): что оставить из 10 пунктов «Почему»
   > Закрыто: вопрос устарел, «Почему» в TEMPLATE-01 сведено к первому абзацу правила
 - [x] `РЕШЕНИЕ` [template.md](docs/1-project/template.md): работа с очередью только через `Infrastructure/PixMaster` или активностями прямо из состояний
@@ -270,7 +275,8 @@
 
 ### Плашки 🚧
 
-- [ ] `🚧` [naming.md](docs/1-project/naming.md): снять после прохода автора
+- [x] `🚧` [naming.md](docs/1-project/naming.md): снять после прохода автора
+  > Закрыто: плашка снята после прохода автора
 - [ ] `🚧` [condition.md](docs/2-develop/condition.md): «будут добавлены примеры»
 - [ ] `🚧` [loop.md](docs/2-develop/loop.md): LOOP-01, LOOP-04
 - [ ] `🚧` [file.md](docs/2-develop/file.md): FILE-03
