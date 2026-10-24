@@ -126,7 +126,7 @@ Orders.ProcessOrderRequest
 | Линейный: один набор данных за запуск | Init → Process Transaction → End Process | Отчет из 1С: Init открывает 1С, Process Transaction выгружает отчет и отправляет его на почту, End Process закрывает 1С |
 | Транзакционный | Init → Get Transaction → Process Transaction → End Process | Робот заказов из примера |
 
-Схему из четырех состояний в RPA часто называют REFramework, по шаблону Robotic Enterprise Framework от UiPath, с которого она пошла ([глоссарий](../glossary.md)). ШАР построен по той же схеме. В PIX есть и отдельный шаблон PIX REFramework ([«Другие шаблоны»](project.md#другие-шаблоны)).
+Схему из четырех состояний в RPA часто называют REFramework, по шаблону Robotic Enterprise Framework от UiPath, с которого она пошла ([глоссарий](../glossary.md)). ШАР построен по той же схеме. В PIX Studio шаблон на этой схеме называется «Универсальный шаблон», его выбирают в поле «Шаблон архитектуры» при создании проекта.
 
 В роботе из трех состояний нет Get Transaction: после Process Transaction он сразу переходит в End Process. Остальное устроено так же: блоки `Route`, повторы после технического исключения, письмо поддержке и End Process.
 
