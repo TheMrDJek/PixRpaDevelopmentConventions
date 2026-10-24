@@ -225,7 +225,7 @@
 ### Решения и ИБ
 
 - [ ] `РЕШЕНИЕ` [NAMING](docs/1-project/naming.md): в именах точка вместо `_` (`SalesOrders.ProcessOrderRequest`). Правило автор пишет сам, project.md уже переведен. После правила поправить NAMING-01 и примеры с `_` в config.md, naming.md, string.md, test.md (TEST-05), variable.md, queue.md (QUEUE-05), master.md (MASTER-03, «Общий формат имен») и лист `master / master-components` в `images/diagrams.drawio`
-- [x] `РЕШЕНИЕ` [TEMPLATE-01](docs/1-project/template.md#template-01-разделяйте-проект-на-слои): что оставить из 10 пунктов «Почему»
+- [x] `РЕШЕНИЕ` [TEMPLATE-01](docs/1-project/template.md#template-01-раскладывайте-скрипты-по-папкам-по-роли): что оставить из 10 пунктов «Почему»
   > Закрыто: вопрос устарел, «Почему» в TEMPLATE-01 сведено к первому абзацу правила
 - [x] `РЕШЕНИЕ` [template.md](docs/1-project/template.md): работа с очередью только через `Infrastructure/PixMaster` или активностями прямо из состояний
   > Закрыто: решено в CLAUDE.md, PIX Master для робота внешняя система, работа с ним лежит в `Infrastructure/PixMaster`

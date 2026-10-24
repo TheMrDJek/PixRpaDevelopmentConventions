@@ -34,7 +34,7 @@
 
 🔴 **Обязательно**
 
-Папки называются так же, как в структуре проекта из [TEMPLATE-01](template.md#template-01-разделяйте-проект-на-слои), без синонимов: `Common`, `Helpers`, `Infrastructure`, `States`, `Tests` и папки состояний внутри `States`.
+Папки называются так же, как в структуре проекта из [TEMPLATE-01](template.md#template-01-раскладывайте-скрипты-по-папкам-по-роли), без синонимов: `Common`, `Helpers`, `Infrastructure`, `States`, `Tests` и папки состояний внутри `States`.
 
 - Не заводите параллельные папки с похожим смыслом: `Utils`, `Tools`, `Misc`, `Scripts`, `New folder`
 - Папки внутри `Infrastructure` называются по внешней системе или каналу: `1C`, `Crm`, `Wms`, `Mail`, `DataBase`, `PixMaster`
