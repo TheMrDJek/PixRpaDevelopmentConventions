@@ -179,7 +179,7 @@ Finance                                  репозиторий домена
 | Глагол | Что делает скрипт | Пример |
 |--------|-------------------|--------|
 | `Get` | Возвращает данные и ничего не меняет | `GetQueueItem`, `GetStockBalance` |
-| `Find` | Ищет запись. Может не найти и вернуть пусто | `FindCounterparty` |
+| `Find` | Ищет запись. Может не найти и вернуть пусто | `FindContractor` |
 | `Create` | Создает новую запись | `CreateInvoice` |
 | `Add` | Добавляет в существующий документ, список или очередь | `AddOrderLine`, `AddResponseItem` |
 | `Update` | Меняет существующую запись | `UpdateOrderStatus` |
@@ -195,7 +195,7 @@ Finance                                  репозиторий домена
 | `Login` | Входит в систему | `LoginToPortal` |
 | `Open`, `Close` | Открывает или закрывает окно, форму, карточку | `OpenOrderCard`, `CloseAllWindows` |
 | `Fill` | Заполняет форму | `FillPaymentForm` |
-| `Select` | Выбирает значение в списке или строку в таблице | `SelectCounterparty` |
+| `Select` | Выбирает значение в списке или строку в таблице | `SelectContractor` |
 | `WaitFor` | Ждет появления окна, элемента или файла | `WaitForReport` |
 
 **Файлы и почта.**
@@ -204,7 +204,7 @@ Finance                                  репозиторий домена
 |--------|-------------------|--------|
 | `Read`, `Write` | Читает или пишет файл | `ReadRegistry`, `WriteReport` |
 | `Copy`, `Move` | Копирует или переносит файл, письмо | `CopyToArchive`, `MoveMailToProcessed` |
-| `Download`, `Upload` | Скачивает с сайта, портала, хранилища или загружает туда | `DownloadStatement`, `UploadProtocol` |
+| `Download`, `Upload` | Скачивает с сайта, портала, хранилища или загружает туда | `DownloadBankStatement`, `UploadProtocol` |
 | `Send`, `Reply` | Отправляет письмо или сообщение, отвечает на письмо | `SendDailyReport`, `ReplyToSender` |
 | `Save` | Сохраняет вложения или данные в файл | `SaveAttachments` |
 
@@ -222,23 +222,36 @@ Finance                                  репозиторий домена
 
 ### Объекты по бизнес-направлениям
 
-У одного бизнес-термина часто несколько верных переводов: контрагент это и `Counterparty`, и `Contractor`. Выберите один вариант и используйте его во всем проекте, а в роботах одного домена лучше тот же. Если в одном проекте встречаются `FindCounterparty` и `GetContractor`, читатель решит, что это разные сущности. Российские сокращения не переводите, а пишите латиницей в PascalCase: `Inn`, `Kpp`, `Upd`.
+У одного бизнес-термина часто несколько верных переводов: контрагент это и `Contractor`, и `Counterparty`. Выберите один вариант и используйте его во всем проекте, а в роботах одного домена лучше тот же. Если в одном проекте встречаются `FindContractor` и `GetCounterparty`, читатель решит, что это разные сущности. В колонке «Принято чаще» вариант, который чаще встречается в роботах и интеграциях с 1С в России и СНГ. Российские сокращения не переводите, а пишите латиницей в PascalCase: `Inn`, `Kpp`, `Upd`.
 
-| Термин | Частые варианты | Пример |
-|--------|-----------------|--------|
-| Контрагент | `Counterparty`, `Contractor`, `Partner` | `FindCounterparty` |
-| Поставщик, покупатель | `Supplier` или `Vendor`, `Customer` или `Buyer` | `GetSupplier` |
-| Договор | `Contract`, `Agreement` | `GetContract` |
-| Счет, счет-фактура | `Invoice`, `Bill` | `CreateInvoice` |
-| УПД, накладная | `Upd`, `Waybill` или `DeliveryNote` | `PostUpd` |
-| Заказ, заявка | `Order`, `Request` или `Application` | `GetOrder` |
-| Платеж, платежное поручение | `Payment`, `PaymentOrder` | `CreatePaymentOrder` |
-| Банковская выписка | `Statement`, `BankStatement` | `DownloadStatement` |
-| Акт сверки | `ReconciliationAct`, `ReconciliationStatement` | `ExtractReconciliationAct` |
-| Протокол разногласий | `DisagreementProtocol`, `DiscrepancyReport` | `BuildDisagreementProtocol` |
-| Сальдо, проводка | `Balance`, `Entry` или `Posting` | `GetBalance` |
-| Номенклатура, склад, остаток | `Item` или `Product`, `Warehouse`, `Stock` | `GetStockBalance` |
-| Сотрудник, отпуск | `Employee`, `Vacation` или `Leave` | `CreateVacationRequest` |
-| ИНН, КПП, БИК | `Inn`, `Kpp`, `Bik` | `FindCounterpartyByInn` |
+| Термин | Принято чаще | Другие варианты | Пример |
+|--------|--------------|-----------------|--------|
+| Контрагент | `Contractor` | `Counterparty`, `Partner` | `FindContractor` |
+| Поставщик | `Supplier` | `Vendor` | `GetSupplier` |
+| Покупатель | `Customer` | `Buyer`, `Client` | `GetCustomer` |
+| Договор | `Contract` | `Agreement` | `GetContract` |
+| Счет на оплату | `Invoice` | `Bill` | `CreateInvoice` |
+| УПД | `Upd` | | `PostUpd` |
+| Накладная | `Waybill` | `DeliveryNote` | `CreateWaybill` |
+| Заказ | `Order` | | `GetOrder` |
+| Заявка, запрос | `Request` | `Application` | `CreateRequest` |
+| Платеж, платежное поручение | `PaymentOrder` | `Payment` | `CreatePaymentOrder` |
+| Банковская выписка | `BankStatement` | `Statement` | `DownloadBankStatement` |
+| Акт сверки | `ReconciliationAct` | `ReconciliationStatement` | `ExtractReconciliationAct` |
+| Протокол разногласий | `DisagreementProtocol` | `DiscrepancyReport` | `BuildDisagreementProtocol` |
+| Сальдо | `Balance` | | `GetBalance` |
+| Проводка | `Entry` | `Posting` | `GetEntries` |
+| Номенклатура | `Product` | `Item` | `FindProduct` |
+| Склад | `Warehouse` | | `GetWarehouse` |
+| Остаток | `Stock` | `Balance` | `GetStockBalance` |
+| Сотрудник | `Employee` | | `GetEmployee` |
+| Отпуск | `Vacation` | `Leave` | `CreateVacationRequest` |
+| ИНН, КПП, БИК | `Inn`, `Kpp`, `Bik` | | `FindContractorByInn` |
+
+Слова с несколькими значениями уточняйте объектом:
+- `Contractor` в английском значит еще и «подрядчик». Если робот работает и с контрагентами, и с подрядчиками, подрядчика назовите `Subcontractor`
+- «Счет» бывает счетом на оплату (`Invoice`), банковским счетом (`BankAccount`) и счетом учета (`LedgerAccount`)
+- «Акт» без уточнения не пишите: акт сверки это `ReconciliationAct`, акт выполненных работ `CompletionAct`
+- `PaymentOrder` это документ, платежное поручение. Если робот работает с фактом оплаты из выписки, а не с документом, берите `Payment`
 
 [⬆ К содержанию](#содержание)
