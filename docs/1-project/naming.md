@@ -222,21 +222,23 @@ Finance                                  репозиторий домена
 
 ### Объекты по бизнес-направлениям
 
-Бизнес-термин переводите один раз и держите перевод одинаковым во всех роботах домена. Российские сокращения не переводите, а пишите латиницей в PascalCase: `Inn`, `Kpp`, `Upd`.
+У одного бизнес-термина часто несколько верных переводов: контрагент это и `Counterparty`, и `Contractor`. Выберите один вариант и используйте его во всем проекте, а в роботах одного домена лучше тот же. Если в одном проекте встречаются `FindCounterparty` и `GetContractor`, читатель решит, что это разные сущности. Российские сокращения не переводите, а пишите латиницей в PascalCase: `Inn`, `Kpp`, `Upd`.
 
-| Термин | В имени | Пример |
-|--------|---------|--------|
-| Контрагент, поставщик, покупатель | `Counterparty`, `Supplier`, `Customer` | `FindCounterparty` |
-| Договор | `Contract` | `GetContract` |
-| Счет, счет-фактура | `Invoice` | `CreateInvoice` |
-| УПД, накладная | `Upd`, `Waybill` | `PostUpd` |
-| Заказ, заявка | `Order`, `Request` | `GetOrder` |
+| Термин | Частые варианты | Пример |
+|--------|-----------------|--------|
+| Контрагент | `Counterparty`, `Contractor`, `Partner` | `FindCounterparty` |
+| Поставщик, покупатель | `Supplier` или `Vendor`, `Customer` или `Buyer` | `GetSupplier` |
+| Договор | `Contract`, `Agreement` | `GetContract` |
+| Счет, счет-фактура | `Invoice`, `Bill` | `CreateInvoice` |
+| УПД, накладная | `Upd`, `Waybill` или `DeliveryNote` | `PostUpd` |
+| Заказ, заявка | `Order`, `Request` или `Application` | `GetOrder` |
 | Платеж, платежное поручение | `Payment`, `PaymentOrder` | `CreatePaymentOrder` |
-| Банковская выписка | `Statement` | `DownloadStatement` |
-| Акт сверки, протокол разногласий | `ReconciliationAct`, `DisagreementProtocol` | `BuildDisagreementProtocol` |
-| Сальдо, проводка | `Balance`, `Entry` | `GetBalance` |
-| Номенклатура, склад, остаток | `Item`, `Warehouse`, `Stock` | `GetStockBalance` |
-| Сотрудник, отпуск | `Employee`, `Vacation` | `CreateVacationRequest` |
+| Банковская выписка | `Statement`, `BankStatement` | `DownloadStatement` |
+| Акт сверки | `ReconciliationAct`, `ReconciliationStatement` | `ExtractReconciliationAct` |
+| Протокол разногласий | `DisagreementProtocol`, `DiscrepancyReport` | `BuildDisagreementProtocol` |
+| Сальдо, проводка | `Balance`, `Entry` или `Posting` | `GetBalance` |
+| Номенклатура, склад, остаток | `Item` или `Product`, `Warehouse`, `Stock` | `GetStockBalance` |
+| Сотрудник, отпуск | `Employee`, `Vacation` или `Leave` | `CreateVacationRequest` |
 | ИНН, КПП, БИК | `Inn`, `Kpp`, `Bik` | `FindCounterpartyByInn` |
 
 [⬆ К содержанию](#содержание)
