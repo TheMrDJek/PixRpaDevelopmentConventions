@@ -48,7 +48,7 @@
 - **Attended-роботы:** `{Департамент}_{РабочееМесто}_{ТипАссистента}`
   - Примеры: `Finance_AccountManager_Assistant`, `HR_Recruiter_Helper`
 
-Для процессов по схеме Dispatcher/Performer (см. [справку](../1-project/project.md#dispatcher--performer-когда-делить-процесс-на-несколько-роботов)) роль указывается в имени процесса: `AP_InvoiceDispatcher_Bot01`, `AP_InvoicePerformer_Bot01`.
+Для процессов по схеме Dispatcher/Performer (см. [справку](../1-project/project.md#когда-делить-решение-на-роботов-dispatcher--performer-и-цепочки)) роль указывается в имени процесса: `AP_InvoiceDispatcher_Bot01`, `AP_InvoicePerformer_Bot01`.
 
 [⬆ К содержанию](#содержание)
 

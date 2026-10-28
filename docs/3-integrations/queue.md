@@ -165,7 +165,7 @@
   - `HR_Employees_Validation`: очередь данных сотрудников для валидации в HR-проекте
   - `Sales_Orders_Confirmation`: очередь заказов для подтверждения в проекте Sales
 
-Если процесс построен по схеме Dispatcher/Performer (см. [справку](../1-project/project.md#dispatcher--performer-когда-делить-процесс-на-несколько-роботов)), очередь между ними называется по сущности, которую она содержит, а не по роботу: `AP_Invoices_Processing`, а не `AP_Dispatcher_Queue`.
+Если процесс построен по схеме Dispatcher/Performer (см. [справку](../1-project/project.md#когда-делить-решение-на-роботов-dispatcher--performer-и-цепочки)), очередь между ними называется по сущности, которую она содержит, а не по роботу: `AP_Invoices_Processing`, а не `AP_Dispatcher_Queue`.
 
 [⬆ К содержанию](#содержание)
 
