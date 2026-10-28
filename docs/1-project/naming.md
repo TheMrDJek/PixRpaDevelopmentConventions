@@ -23,6 +23,16 @@
 
 Решение устроено как solution в C#: в Visual Studio solution объединяет несколько проектов, а здесь решение объединяет проекты роботов. Решение из одного робота называется в две части: `{Домен}.{Решение}`. Связка роботов, например Dispatcher и Performer (см. [справку](project.md#dispatcher--performer-когда-делить-процесс-на-несколько-роботов)), получает третью часть: `{Домен}.{Решение}.{Роль}`. Роботы одного решения стоят в списке рядом.
 
+Роль называйте по работе робота в решении. Dispatcher и Performer это только одна из схем, и делить решение на поставщика и обработчика не обязательно. Большинству решений хватает одного робота: его проще разрабатывать и сопровождать. Несколько роботов нужны, когда этапы работают с разной скоростью, на разных машинах или падают по разным причинам ([справка](project.md#dispatcher--performer-когда-делить-процесс-на-несколько-роботов)):
+
+| Решение | Проекты | Как устроено |
+|---------|---------|--------------|
+| Один робот | `Orders.ProcessOrderRequest` | Робот сам берет заявку, обрабатывает ее в 1С и отвечает. Роли нет |
+| Поставщик и обработчик | `Finance.ProcessInvoices.Dispatcher`, `Finance.ProcessInvoices.Performer` | Dispatcher читает реестр счетов и кладет счета в очередь, Performer проводит каждый счет |
+| Конвейер из трех роботов | `Sales.IncomingDocuments.FetchMail`, `Sales.IncomingDocuments.Recognize`, `Sales.IncomingDocuments.LoadToCrm` | Первый робот забирает письма и кладет вложения в очередь `Sales.IncomingDocuments.ToRecognize`. Второй распознает документы и кладет результат в очередь `Sales.IncomingDocuments.ToCrm`. Третий загружает данные в CRM |
+
+В конвейере каждый этап повторяется и масштабируется отдельно. Если CRM недоступна, письма продолжают забирать и распознавать, а документы ждут в очереди `ToCrm`. Медленное распознавание можно запустить на нескольких агентах, не трогая остальные этапы.
+
 | Что | Имя |
 |-----|-----|
 | Папка проекта и файл проекта | `Orders.ProcessOrderRequest`, `Orders.ProcessOrderRequest.pixproj` |
@@ -53,6 +63,7 @@ Finance                                  репозиторий домена
 | `Orders` | Заказы клиентов | `Orders.ProcessOrderRequest`, `Orders.SendDailyReport` |
 | `Suppliers` | Работа с поставщиками | `Suppliers.FetchAct`, `Suppliers.ReconcileInvoices` |
 | `Finance` | Бухгалтерия и финансы | `Finance.CloseMonth`, `Finance.ProcessInvoices.Dispatcher` |
+| `Sales` | Продажи и работа с клиентами | `Sales.IncomingDocuments.Recognize`, `Sales.UpdateCustomerCards` |
 | `HR` | Кадры | `HR.OnboardEmployee`, `HR.ProcessVacationRequest` |
 | `Prices` | Мониторинг цен | `Prices.ParseSites` |
 
