@@ -100,6 +100,21 @@ def build_toc(path):
     return "\n".join(lines), rules
 
 
+# Порядок разделов в файле: обязательные, рекомендуемые, по ситуации, справки в конце
+ORDER = ["🔴", "🟡", "🟢", "📘"]
+
+
+def order_warning(rel, text):
+    toc = re.search(r"\n## Содержание\n\n(.*?)\n\n", text, re.S)
+    if not toc:
+        return None
+    marks = [m.group(1) for m in re.finditer(r"\((🔴|🟡|🟢|📘)", toc.group(1))]
+    ranks = [ORDER.index(m) for m in marks]
+    if ranks != sorted(ranks):
+        return f"{rel}: разделы не по уровню ({' '.join(marks)})"
+    return None
+
+
 def build_index(all_rules):
     out = [
         "# Реестр правил",
@@ -128,7 +143,7 @@ def build_index(all_rules):
 
 def main():
     check = "--check" in sys.argv
-    changed, all_rules, ids = [], [], {}
+    changed, all_rules, ids, unordered = [], [], {}, []
     files = sorted(p for p in glob.glob(os.path.join(DOCS, "**", "*.md"), recursive=True) if p != INDEX)
     for path in files:
         rel = os.path.relpath(path, DOCS).replace("\\", "/")
@@ -140,6 +155,9 @@ def main():
                 sys.exit(f"Идентификатор {rid} повторяется: {ids[rid]} и {rel}")
             ids[rid] = rel
             all_rules.append((rel, section, rid, name, level, anchor))
+        warning = order_warning(rel, text)
+        if warning:
+            unordered.append(warning)
         if open(path, encoding="utf-8").read() != text:
             changed.append(rel)
             if not check:
@@ -151,6 +169,8 @@ def main():
             open(INDEX, "w", encoding="utf-8", newline="\n").write(index)
     if check and changed:
         sys.exit("Содержание или реестр устарели, запустите python tools/build_docs.py:\n  " + "\n  ".join(changed))
+    if unordered:
+        print("Предупреждение: порядок разделов не по уровню (🔴, 🟡, 🟢, 📘):\n  " + "\n  ".join(unordered))
     print(f"Правил: {len(all_rules)}. Обновлено файлов: {len(changed)}")
 
 
