@@ -359,8 +359,8 @@ var csvData = ProcessFileWithCopy(csvPath, path => ReadCsvFile(path));
 | Собрать путь из частей | `Path.Combine(folder, fileName)` | [FILE-01](#file-01-не-используйте-жестко-заданные-пути-и-конкатенацию-строк-для-путей) |
 | Получить имя или расширение файла | `Path.GetFileName`, `Path.GetFileNameWithoutExtension`, `Path.GetExtension` | — |
 | Папка для временных файлов | `Path.GetTempPath()` | [FILE-02](#file-02-управляйте-временными-файлами) |
-| Создать папку, если ее нет | `Directory.CreateDirectory(path)`: не выбрасывает исключение, если папка уже есть | [ERROR-03](error.md#error-03-не-оставляйте-catch-пустым-и-не-используйте-trycatchfinally-в-бизнес-логике) |
-| Проверить наличие файла перед чтением | `File.Exists(path)` | [ERROR-03](error.md#error-03-не-оставляйте-catch-пустым-и-не-используйте-trycatchfinally-в-бизнес-логике) |
+| Создать папку, если ее нет | `Directory.CreateDirectory(path)`: не выбрасывает исключение, если папка уже есть | [ERROR-02](error.md#error-02-не-оставляйте-catch-пустым-и-не-используйте-trycatchfinally-в-бизнес-логике) |
+| Проверить наличие файла перед чтением | `File.Exists(path)` | [ERROR-02](error.md#error-02-не-оставляйте-catch-пустым-и-не-используйте-trycatchfinally-в-бизнес-логике) |
 | Скопировать файл перед обработкой | `File.Copy(source, temp, overwrite: true)` | [FILE-03](#file-03-копируйте-файлы-перед-обработкой) |
 | Перебрать файлы по маске | `Directory.GetFiles(folder, "*.pdf")` | — |
 
