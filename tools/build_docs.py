@@ -13,6 +13,8 @@ DOCS = os.path.join(ROOT, "docs")
 INDEX = os.path.join(DOCS, "rules-index.md")
 RULE = re.compile(r"^## ([A-Z]+-\d+)\. (.+)$")
 LEVEL = re.compile(r"^(🔴 \*\*Обязательно\*\*|🟡 \*\*Рекомендуется\*\*|🟢 \*\*По ситуации\*\*)")
+# Справка: раздел без тега, который описывает подход, а не требование. Метка стоит на месте уровня
+REFERENCE = re.compile(r"^📘 \*\*Справка\*\*")
 
 # --- Настройки репозитория -------------------------------------------------
 # Разделы реестра правил: (папка внутри docs/, заголовок). Пустая папка — все файлы.
@@ -73,6 +75,8 @@ def parse(path, tag):
             if rm.group(1).rsplit("-", 1)[0] != tag:
                 sys.exit(f"{path}: тег правила {rm.group(1)} должен совпадать с именем файла: {tag}-NN")
             rules.append((rm.group(1), rm.group(2), level, anchor))
+        elif any(REFERENCE.match(nxt) for nxt in lines[i + 1:i + 4]):
+            level = "📘 Справка"
         headings.append((m.group(2), anchor, level))
     return headings, rules
 
