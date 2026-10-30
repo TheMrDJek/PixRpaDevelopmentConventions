@@ -148,7 +148,7 @@
   - [ ] [string.md](docs/2-develop/string.md): 7
   - [ ] [log.md](docs/2-develop/log.md): 3
   - [ ] [db.md](docs/3-integrations/db.md), [integration.md](docs/3-integrations/integration.md): по 2
-  - [ ] [code.md](docs/2-develop/code.md), [config.md](docs/1-project/config.md), [recovery.md](docs/2-develop/recovery.md), [test.md](docs/2-develop/test.md): по 1
+  - [ ] [code.md](docs/2-develop/code.md), [recovery.md](docs/2-develop/recovery.md), [test.md](docs/2-develop/test.md): по 1
 - [ ] **2.8.** Повторный проход сверху вниз, по порядку карты разделов. Ранние разделы ссылаются на поздние и пересказывают их, а поздние мы переписываем позже. Для каждого файла сверить:
   - ссылки на правила: тег, якорь и смысл совпадают с итоговым текстом (project.md опирается на QUEUE-06, QUEUE-07, QUEUE-11, QUEUE-12, FILE-01, FILE-03, CONFIG-02, RECOVERY-01, CODE-02, EXCEL-01, LOOP-01, LOOP-04; template.md на ERROR-03, ERROR-04, QUEUE-01, QUEUE-03, QUEUE-11, RECOVERY-05, RECOVERY-02, RECOVERY-03, TEST-04, TEST-05, NAMING-02, NAMING-03)
   - пересказ чужого правила не расходится с самим правилом и не повторяет его целиком
