@@ -57,7 +57,7 @@ using var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(60) };
 var response = httpClient.PostAsync(llmUrl, new StringContent(requestJson, Encoding.UTF8, "application/json")).Result;
 
 // ✅ Хорошо: клиент создан в Init и пришел входным параметром
-var response = In_LlmHttpClient.PostAsync(llmUrl, new StringContent(requestJson, Encoding.UTF8, "application/json")).Result;
+var response = in_LlmHttpClient.PostAsync(llmUrl, new StringContent(requestJson, Encoding.UTF8, "application/json")).Result;
 ```
 
 **Чем опасен клиент на каждый запрос.** После `Dispose` Windows еще несколько минут держит сокет занятым. Цикл из сотен запросов занимает свободные порты, и очередной запрос падает с `SocketException`, хотя API работает. Каждый новый клиент к тому же заново открывает соединение и TLS, и цикл идет медленнее.
