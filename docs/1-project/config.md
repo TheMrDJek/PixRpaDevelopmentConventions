@@ -178,7 +178,7 @@ ID присваивает мастер. На другом мастере у то
 | Строку, число или логическое значение | [«Получить данные из Master по ключу»](https://docs.pixrobotics.com/articles/#!rpa/actions-data-getdatabykeyactivity) | String, Int32 или Boolean |
 | Любой ассет, кроме учетных данных | [«Получить данные из Master»](https://docs.pixrobotics.com/articles/#!rpa/actions-data-getdata) | String |
 | Защищенные данные | [«Получить данные из Master в виде SecureString»](https://docs.pixrobotics.com/articles/#!rpa/actions-data-getdataassecurestring) | SecureString |
-| Учетные данные | [«Получить данные авторизации из Master в виде SecureString»](https://docs.pixrobotics.com/articles/#!rpa/actions-data-getdataascredentials) | Логин: String, в вариантах «Логин скрыт» SecureString. Пароль: SecureString |
+| Учетные данные | [«Получить данные авторизации из Master в виде SecureString»](https://docs.pixrobotics.com/articles/#!rpa/actions-data-getdataascredentials) | Логин: String, в вариантах «Логин скрыт» SecureString. Пароль: String или SecureString |
 
 Число и логическое значение из строки придется преобразовать самим, поэтому для них удобнее «Получить данные из Master по ключу».
 
