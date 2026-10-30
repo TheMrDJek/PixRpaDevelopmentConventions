@@ -213,7 +213,7 @@
 - [ ] `PIX` [QUEUE-03](docs/3-integrations/queue.md#queue-03-правильно-обрабатывайте-повторные-попытки-retry): в правиле экспоненциальная задержка, в PIX Master она фиксированная
 - [ ] `PIX` [QUEUE-10](docs/3-integrations/queue.md#queue-10-используйте-единую-шкалу-приоритетов): в правиле приоритеты 1–10, в PIX Master Низкий / Средний / Высокий
 - [ ] `PIX` [QUEUE-11](docs/3-integrations/queue.md#queue-11-отмечайте-в-элементе-очереди-выполненные-необратимые-шаги): какой активностью робот пишет метку в элемент
-- [ ] `PIX` [INTEGRATION-04](docs/3-integrations/integration.md#integration-04-выполняйте-http-запросы-через-httpclient): есть ли HTTP-активности; можно ли хранить `HttpClient` в переменной между состояниями
+- [ ] `PIX` [INTEGRATION-05](docs/3-integrations/integration.md#integration-05-выполняйте-http-запросы-через-httpclient) и [INTEGRATION-03](docs/3-integrations/integration.md#integration-03-создавайте-httpclient-один-раз-на-запуск-робота): есть ли HTTP-активности и переиспользуют ли они соединения; можно ли хранить `HttpClient` в переменной `main.pix` и передавать в скрипты входным параметром
 - [ ] `PIX` [EXCEL-01](docs/3-integrations/excel.md#excel-01-не-используйте-excel-interop-и-com): названия активностей, которые работают с Excel без запуска приложения
 - [ ] `PIX` [MASTER-05](docs/4-master/master.md#master-05-выбирайте-тип-триггера-по-характеру-процесса): какие типы триггеров есть (расписание, событие, очередь)
 - [ ] `PIX` [master.md](docs/4-master/master.md): есть ли в мастере папки, теги и группы для роботов, ассетов, машин

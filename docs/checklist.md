@@ -28,6 +28,7 @@
 - [ ] В очереди задан таймаут для статуса Processing, робот подтверждает элемент при любом исходе: [QUEUE-07](3-integrations/queue.md#queue-07-ограничивайте-время-элемента-в-статусах-new-и-processing)
 - [ ] Робот останавливается после серии технических ошибок и проверяет сигнал остановки: [RECOVERY-02](2-develop/recovery.md#recovery-02-останавливайте-робота-после-серии-технических-исключений-подряд), [RECOVERY-03](2-develop/recovery.md#recovery-03-проверяйте-сигнал-остановки-от-мастера)
 - [ ] У каждого цикла ожидания и внешнего вызова есть таймаут: [LOOP-01](2-develop/loop.md#loop-01-ограничивайте-каждый-цикл-таймаутом-или-числом-итераций), [INTEGRATION-01](3-integrations/integration.md#integration-01-задавайте-таймауты-для-всех-внешних-вызовов)
+- [ ] `HttpClient` создается один раз в Init, а не на каждый запрос или итерацию цикла: [INTEGRATION-03](3-integrations/integration.md#integration-03-создавайте-httpclient-один-раз-на-запуск-робота), [LOOP-05](2-develop/loop.md#loop-05-создавайте-переиспользуемые-объекты-до-цикла)
 - [ ] Нет Excel Interop и Outlook COM: [EXCEL-01](3-integrations/excel.md#excel-01-не-используйте-excel-interop-и-com), [MAIL-01](3-integrations/mail.md#mail-01-работайте-с-почтой-по-протоколам-а-не-через-outlook)
 - [ ] Временные файлы удаляются: [FILE-02](2-develop/file.md#file-02-управляйте-временными-файлами)
 
